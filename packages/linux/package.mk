@@ -40,6 +40,14 @@ case "$LINUX" in
     PKG_SOURCE_DIR="$PKG_NAME-amlogic-$PKG_VERSION*"
     PKG_PATCH_DIRS="amlogic-3.14"
     ;;
+  amlogic-4.10)
+    PKG_VERSION="elc-na-2017-demo-mali-q3"
+    PKG_COMMIT="5147892"
+    PKG_SITE="https://github.com/superna9999/linux"
+    PKG_URL="https://github.com/superna9999/linux/archive/$PKG_COMMIT.tar.gz"
+    PKG_SOURCE_NAME="$PKG_NAME-$LINUX-$PKG_COMMIT.tar.gz"
+    PKG_SOURCE_DIR="$PKG_NAME-${PKG_COMMIT}*"
+    ;;
   imx6-3.14-sr)
     PKG_VERSION="3.14-sr"
     PKG_COMMIT="2fb11e2"
