@@ -70,7 +70,7 @@ make_target() {
   done
 
   for UBOOT_TARGET in $UBOOT_CONFIG; do
-    if [ "$PROJECT" = "Odroid_C2" ]; then
+    if [ "$PROJECT" = "Odroid_C2" -o "$DEVICE" = "Odroid_C2" ]; then
       export PATH=$TOOLCHAIN/lib/gcc-linaro-aarch64-elf/bin/:$TOOLCHAIN/lib/gcc-linaro-arm-eabi/bin/:$PATH
       CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make mrproper
       CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make $UBOOT_TARGET
@@ -130,8 +130,20 @@ makeinstall_target() {
 
   cp -PR $PROJECT_DIR/$PROJECT/bootloader/uEnv*.txt $INSTALL/usr/share/bootloader 2>/dev/null || :
 
-  case $PROJECT in
+  case $DEVICE in
     Odroid_C2)
+      cp -PRv $PKG_DIR/scripts/update-c2.sh $INSTALL/usr/share/bootloader/update.sh
+      cp -PRv $PKG_BUILD/u-boot.bin $INSTALL/usr/share/bootloader/u-boot
+      if [ -f $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz ]; then
+        cp -PRv $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz $INSTALL/usr/share/bootloader
+      elif [ -f $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz ]; then
+        cp -PRv $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz $INSTALL/usr/share/bootloader
+      fi
+      ;;
+  esac
+
+  case $PROJECT in
+    Odroid_C2*)
       cp -PRv $PKG_DIR/scripts/update-c2.sh $INSTALL/usr/share/bootloader/update.sh
       cp -PRv $PKG_BUILD/u-boot.bin $INSTALL/usr/share/bootloader/u-boot
       if [ -f $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz ]; then
