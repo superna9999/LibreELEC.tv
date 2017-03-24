@@ -117,7 +117,7 @@ fi
 
   if [ "$BOOTLOADER" = "syslinux" ]; then
     mformat -v "$FAT_VOLUME_LABEL" -N "$FAT_SERIAL_NUMBER" ::
-  elif [ "$BOOTLOADER" = "bcm2835-bootloader" -o "$BOOTLOADER" = "u-boot" ]; then
+  elif [ "$BOOTLOADER" = "bcm2835-bootloader" -o "$BOOTLOADER" = "u-boot" -o "$BOOTLOADER" = "u-boot-v2" ]; then
     mformat -v "$FAT_VOLUME_LABEL" ::
   fi
   sync
@@ -197,7 +197,7 @@ EOF
       mcopy -s $RELEASE_DIR/3rdparty/bootloader/overlays ::
     fi
 
-elif [ "$BOOTLOADER" = "u-boot" ]; then
+elif [ "$BOOTLOADER" = "u-boot" -o "$BOOTLOADER" = "u-boot-v2" ]; then
   # create bootloader configuration
     echo "image: creating bootloader configuration..."
     if [ -n "$UBOOT_SYSTEM" -a -f "$RELEASE_DIR/3rdparty/bootloader/uEnv-$UBOOT_SYSTEM.txt" ]; then
