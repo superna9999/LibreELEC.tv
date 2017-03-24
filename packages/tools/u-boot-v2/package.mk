@@ -21,7 +21,7 @@ PKG_SITE=""
 PKG_URL="ftp://ftp.denx.de/pub/u-boot/u-boot-$PKG_VERSION.tar.bz2"
 PKG_SOURCE_DIR="u-boot-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_ARCH="arm"
+PKG_ARCH="arm aarch64"
 PKG_LICENSE="GPL"
 PKG_SECTION="tools"
 PKG_SHORTDESC="u-boot: Universal Bootloader project"
@@ -77,11 +77,14 @@ make_target() {
     fi
   done
 
-  mv tmp_output/* .
+  [ -n "$(ls -A tmp_output/*)" ] && mv tmp_output/* .
   rmdir tmp_output
 }
 
 makeinstall_target() {
+  mkdir -p $TOOLCHAIN/bin
+  cp tools/mkimage $TOOLCHAIN/bin
+
   mkdir -p $INSTALL/usr/share/bootloader
 
   cp $PKG_BUILD/u-boot-*.imx $INSTALL/usr/share/bootloader 2>/dev/null || : #
