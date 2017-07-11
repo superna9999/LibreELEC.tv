@@ -39,13 +39,13 @@ if [ "$DISPLAYSERVER" = "x11" ]; then
   KODI_XORG="-DCORE_PLATFORM_NAME=x11"
 fi
 
-if [ ! "$OPENGL" = "no" ]; then
-  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $OPENGL glu"
-fi
+#if [ ! "$OPENGL" = "no" ]; then
+#  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $OPENGL glu"
+#fi
 
-if [ "$OPENGLES_SUPPORT" = yes ]; then
+#if [ "$OPENGLES_SUPPORT" = yes ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $OPENGLES"
-fi
+#fi
 
 if [ "$ALSA_SUPPORT" = yes ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET alsa-lib"
@@ -199,6 +199,8 @@ if [ ! "$KODIPLAYER_DRIVER" = default ]; then
   elif [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
     KODI_PLAYER="-DCORE_PLATFORM_NAME=aml"
   fi
+elif [ -n "$KODIPLAYER_PLATFORM" ] ; then
+  KODI_PLAYER="-DCORE_PLATFORM_NAME=$KODIPLAYER_PLATFORM"
 fi
 
 KODI_LIBDVD="$KODI_DVDCSS \
