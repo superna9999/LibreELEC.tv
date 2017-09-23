@@ -33,6 +33,12 @@ elif [ "$UBOOT_VERSION" = "hardkernel" ]; then
   PKG_SITE="https://github.com/hardkernel/u-boot"
   PKG_URL="https://github.com/hardkernel/u-boot/archive/$PKG_VERSION.tar.gz"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET gcc-linaro-aarch64-elf:host gcc-linaro-arm-eabi:host"
+elif [ "$UBOOT_VERSION" = "libretech" ]; then
+  PKG_VERSION="a43076c"
+  PKG_SHA256="0ae5fd97ba86fcd6cc7b2722580745a0ddbf651ffa0cc0bd188a05a9b668373f"
+  PKG_SITE="https://github.com/baylibre/u-boot"
+  PKG_URL="https://github.com/baylibre/u-boot/archive/$PKG_VERSION.tar.gz"
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET gcc-linaro-aarch64-none-elf:host gcc-linaro-arm-none-eabi:host"
 else
   exit 0
 fi
@@ -61,7 +67,9 @@ pre_configure_target() {
   MAKEFLAGS=-j1
 
 # copy compiler-gcc5.h to compiler-gcc6. for fake building
-  cp include/linux/compiler-gcc5.h include/linux/compiler-gcc6.h
+  if [ -e include/linux/compiler-gcc5.h ]; then
+    cp include/linux/compiler-gcc5.h include/linux/compiler-gcc7.h
+  fi
 }
 
 make_target() {
@@ -77,6 +85,10 @@ make_target() {
       CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make mrproper
       CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make $UBOOT_TARGET
       CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make HOSTCC="$HOST_CC" HOSTSTRIP="true"
+    elif [ "$DEVICE" = "LibreTech_CC" ]; then
+      export PATH=$TOOLCHAIN/lib/gcc-linaro-aarch64-none-elf/bin/:$TOOLCHAIN/lib/gcc-linaro-arm-none-eabi/bin/:$PATH
+      CFLAGS="" LDFLAGS="" make $UBOOT_TARGET
+      CFLAGS="" LDFLAGS="" make HOSTCC="$HOST_CC" HOSTSTRIP="true" 
     else
       make CROSS_COMPILE="$TARGET_PREFIX" ARCH=arm mrproper
       make CROSS_COMPILE="$TARGET_PREFIX" ARCH=arm $UBOOT_TARGET
@@ -136,6 +148,15 @@ makeinstall_target() {
     Odroid_C2)
       cp -PRv $PKG_DIR/scripts/update-c2.sh $INSTALL/usr/share/bootloader/update.sh
       cp -PRv $PKG_BUILD/u-boot.bin $INSTALL/usr/share/bootloader/u-boot
+      if [ -f $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz ]; then
+        cp -PRv $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz $INSTALL/usr/share/bootloader
+      elif [ -f $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz ]; then
+        cp -PRv $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz $INSTALL/usr/share/bootloader
+      fi
+      ;;
+    LibreTech_CC)
+      cp -PRv $PKG_DIR/scripts/update-libretech-cc.sh $INSTALL/usr/share/bootloader/update.sh
+      cp -PRv $PKG_BUILD/fip/u-boot.bin.sd.bin $INSTALL/usr/share/bootloader/u-boot
       if [ -f $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz ]; then
         cp -PRv $PROJECT_DIR/$PROJECT/splash/boot-logo.bmp.gz $INSTALL/usr/share/bootloader
       elif [ -f $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz ]; then

@@ -48,6 +48,15 @@ mkdir -p $RELEASE_DIR/3rdparty/bootloader
         cp -PR $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz $RELEASE_DIR/3rdparty/bootloader
       fi
       ;;
+    LibreTech_CC)
+      cp -PR $BUILD/$BOOTLOADER-*/fip/u-boot.bin.sd.bin $RELEASE_DIR/3rdparty/bootloader/u-boot
+      cp -PR $PROJECT_DIR/$PROJECT/devices/$DEVICE/bootloader/boot.ini $RELEASE_DIR/3rdparty/bootloader
+      if [ -f $PROJECT_DIR/$PROJECT/devices/$DEVICE/splash/boot-logo.bmp.gz ]; then
+        cp -PR $PROJECT_DIR/$PROJECT/devices/$DEVICE/splash/boot-logo.bmp.gz $RELEASE_DIR/3rdparty/bootloader
+      elif [ -f $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz ]; then
+        cp -PR $DISTRO_DIR/$DISTRO/splash/boot-logo.bmp.gz $RELEASE_DIR/3rdparty/bootloader
+      fi
+      ;;
   esac
 
   case $PROJECT in
