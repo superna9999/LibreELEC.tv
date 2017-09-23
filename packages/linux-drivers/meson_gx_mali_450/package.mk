@@ -20,8 +20,8 @@ PKG_NAME="meson_gx_mali_450"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/superna9999/meson_gx_mali_450"
-# r6p1
-PKG_VERSION="ff8527d"
+# r7p0
+PKG_VERSION="fb20cef"
 PKG_URL="https://github.com/jakogut/meson_gx_mali_450/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="meson_gx_mali_450-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain linux"
