@@ -1,7 +1,7 @@
-From c3be57d7fef20314fffd81e74b70ea75e35a4d26 Mon Sep 17 00:00:00 2001
+From 2bff369409aef6dc20882b1068c3e9db7b979386 Mon Sep 17 00:00:00 2001
 From: Neil Armstrong <narmstrong@baylibre.com>
 Date: Tue, 30 May 2017 15:50:21 +0200
-Subject: [PATCH 09/79] platform: Add Amlogic Meson AO CEC Controller driver
+Subject: [PATCH 09/67] platform: Add Amlogic Meson AO CEC Controller driver
 
 The Amlogic SoC embeds a standalone CEC controller, this patch adds a driver
 for such controller.
@@ -22,10 +22,10 @@ Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
  create mode 100644 drivers/media/platform/meson/ao-cec.c
 
 diff --git a/drivers/media/platform/Kconfig b/drivers/media/platform/Kconfig
-index 041cb80..857e068 100644
+index fb1fa0b..bc04b33 100644
 --- a/drivers/media/platform/Kconfig
 +++ b/drivers/media/platform/Kconfig
-@@ -499,6 +499,17 @@ menuconfig CEC_PLATFORM_DRIVERS
+@@ -536,6 +536,17 @@ menuconfig CEC_PLATFORM_DRIVERS
  
  if CEC_PLATFORM_DRIVERS
  
@@ -44,13 +44,13 @@ index 041cb80..857e068 100644
         tristate "Samsung S5P CEC driver"
         depends on PLAT_S5P || ARCH_EXYNOS || COMPILE_TEST
 diff --git a/drivers/media/platform/Makefile b/drivers/media/platform/Makefile
-index 63303d6..db15c59 100644
+index 9beadc7..a52d7b6 100644
 --- a/drivers/media/platform/Makefile
 +++ b/drivers/media/platform/Makefile
-@@ -77,3 +77,5 @@ obj-$(CONFIG_VIDEO_MEDIATEK_VCODEC)	+= mtk-vcodec/
- obj-$(CONFIG_VIDEO_MEDIATEK_MDP)	+= mtk-mdp/
- 
+@@ -86,3 +86,5 @@ obj-$(CONFIG_VIDEO_MEDIATEK_MDP)	+= mtk-mdp/
  obj-$(CONFIG_VIDEO_MEDIATEK_JPEG)	+= mtk-jpeg/
+ 
+ obj-$(CONFIG_VIDEO_QCOM_VENUS)		+= qcom/venus/
 +
 +obj-y					+= meson/
 diff --git a/drivers/media/platform/meson/Makefile b/drivers/media/platform/meson/Makefile

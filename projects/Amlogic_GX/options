@@ -24,7 +24,7 @@
     esac
 
   # Bootloader to use (syslinux / u-boot / bcm2835-bootloader)
-    if [ "$DEVICE" = "Odroid_C2" ]; then
+    if [ "$DEVICE" = "Odroid_C2" -o "$DEVICE" = "LibreTech_CC" ]; then
         BOOTLOADER="u-boot"
     else
         BOOTLOADER="u-boot-v2"
@@ -33,18 +33,22 @@
   # u-boot version to use (default)
     if [ "$DEVICE" = "Odroid_C2" ]; then
         UBOOT_VERSION="hardkernel"
+    elif [ "$DEVICE" = "LibreTech_CC" ]; then
+        UBOOT_VERSION="libretech"
     fi
 
   # Configuration for u-boot
     if [ "$DEVICE" = "Odroid_C2" ]; then
         UBOOT_CONFIG="odroidc2_defconfig"
+    elif [ "$DEVICE" = "LibreTech_CC" ]; then
+        UBOOT_CONFIG="libretech_cc_defconfig"
     else
         # Use Odroid-C2 to have a generic Amlogic build
         UBOOT_CONFIG_V2="odroid-c2_defconfig"
     fi
 
   # Target Configfile for u-boot
-    if [ "$DEVICE" = "Odroid_C2" ]; then
+    if [ "$DEVICE" = "Odroid_C2" -o "$DEVICE" = "LibreTech_CC" ]; then
         UBOOT_CONFIGFILE="boot.ini"
     fi
 
