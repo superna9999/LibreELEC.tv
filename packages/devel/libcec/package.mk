@@ -17,12 +17,12 @@
 ################################################################################
 
 PKG_NAME="libcec"
-PKG_VERSION="5250931"
-PKG_SHA256="22c746602e85ea575bd247adfb17181849fb54d97428a25ccd29a064e43e6cde"
+PKG_VERSION="f4db703"
+PKG_SHA256="1be8f6931d853c3abb638376eb0b99da1e2a0b294d28882b6cecd905cad0477d"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://libcec.pulse-eight.com/"
-PKG_URL="https://github.com/Pulse-Eight/libcec/archive/$PKG_VERSION.tar.gz"
+PKG_URL="https://github.com/Kwiboo/libcec/archive/$PKG_VERSION.tar.gz"
 [ "$PROJECT" = "imx6" ] && PKG_PATCH_DIRS="${LINUX#imx6-}"
 PKG_DEPENDS_TARGET="toolchain systemd lockdev p8-platform"
 PKG_SECTION="system"
@@ -54,6 +54,10 @@ if [ "$KODIPLAYER_DRIVER" = "libamcodec" ]; then
   fi
 else
   PKG_CMAKE_OPTS_TARGET="$PKG_CMAKE_OPTS_TARGET -DHAVE_AOCEC_API=0 -DHAVE_AMLOGIC_API=0"
+fi
+
+if [ "$PROJECT" = "Amlogic_GX" ]; then
+  PKG_CMAKE_OPTS_TARGET="$PKG_CMAKE_OPTS_TARGET -DHAVE_LINUX_API=1"
 fi
 
 pre_configure_target() {
