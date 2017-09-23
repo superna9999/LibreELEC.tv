@@ -20,9 +20,9 @@ PKG_NAME="opengl-meson-aarch64"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="nonfree"
 PKG_SITE="https://github.com/superna9999/meson_gx_mali_450"
-PKG_VERSION="2016-08-18-5aaca1b35f"
-PKG_URL="https://github.com/superna9999/meson_gx_mali_450/releases/download/for-4.10/arm-buildroot-$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="buildroot"
+PKG_VERSION="kernel_3.14_wayland_20170630"
+PKG_URL="https://github.com/superna9999/meson_gx_mali_450/releases/download/for-4.12/buildroot_openlinux_${PKG_VERSION}_mali.tar.gz"
+PKG_SOURCE_DIR="buildroot_openlinux"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SECTION="graphics"
 PKG_SHORTDESC="opengl-meson-aarch64: OpenGL ES pre-compiled libraries for Mali GPUs found in Amlogic Meson SoCs"
@@ -37,10 +37,11 @@ make_target() {
 
 makeinstall_target() {
   mkdir -p $SYSROOT_PREFIX/usr/include
-    cp -PR package/opengl/src/include/* $SYSROOT_PREFIX/usr/include
+    cp -PR buildroot/package/meson-mali/include/* $SYSROOT_PREFIX/usr/include
+    cp -PR buildroot/package/meson-mali/include/EGL_platform/platform_fbdev/* $SYSROOT_PREFIX/usr/include/EGL/
 
   mkdir -p $SYSROOT_PREFIX/usr/lib
-    cp -PR package/opengl/src/lib/arm64/r6p1/m450/libMali.so $SYSROOT_PREFIX/usr/lib
+    cp -PR buildroot/package/meson-mali/lib/arm64/r7p0/m450/libMali.so $SYSROOT_PREFIX/usr/lib
 
     ln -sf libMali.so $SYSROOT_PREFIX/usr/lib/libEGL.so.1.4
     ln -sf libEGL.so.1.4 $SYSROOT_PREFIX/usr/lib/libEGL.so.1
@@ -55,7 +56,7 @@ makeinstall_target() {
     ln -sf libGLESv2.so.2 $SYSROOT_PREFIX/usr/lib/libGLESv2.so
 
   mkdir -p $INSTALL/usr/lib
-    cp -PR package/opengl/src/lib/arm64/r6p1/m450/libMali.so $INSTALL/usr/lib
+    cp -PR buildroot/package/meson-mali/lib/arm64/r7p0/m450/libMali.so $INSTALL/usr/lib
 
     ln -sf libMali.so $INSTALL/usr/lib/libEGL.so.1.4
     ln -sf libEGL.so.1.4 $INSTALL/usr/lib/libEGL.so.1
