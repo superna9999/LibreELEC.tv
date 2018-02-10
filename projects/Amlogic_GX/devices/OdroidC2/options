@@ -1,0 +1,5 @@
+  # Configuration for u-boot
+    UBOOT_SYSTEM="odroid-c2"
+
+  # Kernel extra targets to build
+    KERNEL_UBOOT_EXTRA_TARGET="amlogic/meson-gxbb-odroidc2.dtb"
