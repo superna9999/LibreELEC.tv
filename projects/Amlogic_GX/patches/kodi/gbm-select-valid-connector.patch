@@ -1,0 +1,16 @@
+Only in kodi-f621a02/xbmc/windowing/gbm: .DRMAtomic.cpp.swp
+diff -ur kodi-f621a02.orig/xbmc/windowing/gbm/DRMUtils.cpp kodi-f621a02/xbmc/windowing/gbm/DRMUtils.cpp
+--- kodi-f621a02.orig/xbmc/windowing/gbm/DRMUtils.cpp	2018-02-12 12:28:05.206721233 +0100
++++ kodi-f621a02/xbmc/windowing/gbm/DRMUtils.cpp	2018-02-12 16:19:39.538080021 +0100
+@@ -145,7 +145,10 @@
+   {
+     m_connector->connector = drmModeGetConnector(m_fd,
+                                                       m_drm_resources->connectors[i]);
+-    if(m_connector->connector->connection == DRM_MODE_CONNECTED)
++
++    /* Connectors must be connected, but also configured with valid encoders and CRTCs */
++    if (m_connector->connector->encoder_id &&
++        m_connector->connector->connection == DRM_MODE_CONNECTED)
+     {
+       CLog::Log(LOGDEBUG, "CDRMUtils::%s - found connector: %d", __FUNCTION__,
+                                                                  m_connector->connector->connector_id);
