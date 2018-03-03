@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="wireless-regdb"
-PKG_VERSION="2017.03.07"
-PKG_SHA256="371eafa3b26ece916ef83aca02c4bed2e54099eb5b8c6d22d3a4358dce6535b9"
+PKG_VERSION="2017.12.23"
+PKG_SHA256="0e53e605dd98e7f34429242b5b2afea6dbc91bb913892fa01101e0ec481a4ab9"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://wireless.kernel.org/en/developers/Regulatory"

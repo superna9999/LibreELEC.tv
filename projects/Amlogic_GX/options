@@ -50,7 +50,7 @@
 
   # Kernel to use. values can be:
   # default:  default mainline kernel
-    LINUX="default"
+    LINUX="amlogic-4.16"
 
   # kernel image name
     KERNEL_NAME="Image"
