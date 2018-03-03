@@ -59,6 +59,13 @@ case "$LINUX" in
     PKG_SHA256="fdf9571fe8ad514e0dd7185606828a15199f3ddb140f99ba7fcaf37dadbe8491"
     PKG_URL="https://github.com/raspberrypi/linux/archive/$PKG_VERSION.tar.gz"
     ;;
+  amlogic-4.16)
+    PKG_VERSION="4a3928c" #4.16-rc3
+    PKG_SHA256="2b4365ab610334c77c174dc2e945bc8145333453ba68ee3d3005e403318f06bf"
+    PKG_URL="https://github.com/torvalds/linux/archive/$PKG_VERSION.tar.gz"
+    PKG_SOURCE_DIR="$PKG_NAME-$PKG_VERSION*"
+    PKG_PATCH_DIRS="default"
+    ;;
   *)
     PKG_VERSION="4.14.24"
     PKG_SHA256="ba512d1bd7f5910bae0f5d66554810f097f82e5df6fccb8c7cc4a11410839801"
@@ -161,8 +168,10 @@ pre_make_target() {
 
   make oldconfig
 
-  # regdb
-  cp $(get_build_dir wireless-regdb)/db.txt $PKG_BUILD/net/wireless/db.txt
+  # regdb (backward compatability with pre-4.15 kernels)
+  if grep -q ^CONFIG_CFG80211_INTERNAL_REGDB= $PKG_BUILD/.config ; then
+    cp $(get_build_dir wireless-regdb)/db.txt $PKG_BUILD/net/wireless/db.txt
+  fi
 }
 
 make_target() {
@@ -300,4 +309,9 @@ post_install() {
 
   # bluez looks in /etc/firmware/
     ln -sf /$(get_full_firmware_dir)/ $INSTALL/etc/firmware
+
+  # regdb and signature is now loaded as firmware by 4.15+
+    if grep -q ^CONFIG_CFG80211_REQUIRE_SIGNED_REGDB= $PKG_BUILD/.config; then
+      cp $(get_build_dir wireless-regdb)/regulatory.db{,.p7s} $INSTALL/$(get_full_firmware_dir)
+    fi
 }
