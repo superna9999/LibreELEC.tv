@@ -9,7 +9,7 @@ devices = {
     },
   },
   'Amlogic_GX' : {
-    'OdroidC2' : {
+    'Odroid_C2' : {
       'odroid-c2' : { 'dtb' : 'meson-gxbb-odroidc2.dtb', 'config' : 'odroid-c2_defconfig' },
     },
     'P212' : {
