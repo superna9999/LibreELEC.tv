@@ -96,7 +96,3 @@ makeinstall_target() {
       ln -sf libwayland-egl.so.1 $INSTALL/usr/lib/libwayland-egl.so.1.0.0
     fi
 }
-
-post_install() {
-  enable_service unbind-console.service
-}
