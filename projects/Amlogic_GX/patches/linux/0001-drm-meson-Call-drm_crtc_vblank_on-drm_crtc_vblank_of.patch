@@ -1,7 +1,8 @@
-From b1017a79f84765425cf22355053e8109d7e46269 Mon Sep 17 00:00:00 2001
+From 26a7e0afbd5d8f39565d8b8d48d04096343ae0c0 Mon Sep 17 00:00:00 2001
 From: Neil Armstrong <narmstrong@baylibre.com>
 Date: Wed, 28 Feb 2018 16:07:18 +0100
-Subject: [PATCH] drm/meson: Call drm_crtc_vblank_on / drm_crtc_vblank_off
+Subject: [PATCH 01/68] drm/meson: Call drm_crtc_vblank_on /
+ drm_crtc_vblank_off
 
 Make sure that the CRTC code will call the enable/disable_vblank hooks.
 
@@ -11,10 +12,10 @@ Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/drivers/gpu/drm/meson/meson_crtc.c b/drivers/gpu/drm/meson/meson_crtc.c
-index 5155f01..c96686c 100644
+index 0552020..7c0bdc8 100644
 --- a/drivers/gpu/drm/meson/meson_crtc.c
 +++ b/drivers/gpu/drm/meson/meson_crtc.c
-@@ -101,6 +101,8 @@ static void meson_crtc_atomic_enable(struct drm_crtc *crtc,
+@@ -102,6 +102,8 @@ static void meson_crtc_atomic_enable(struct drm_crtc *crtc,
  			    priv->io_base + _REG(VPP_MISC));
  
  	priv->viu.osd1_enabled = true;
@@ -23,7 +24,7 @@ index 5155f01..c96686c 100644
  }
  
  static void meson_crtc_atomic_disable(struct drm_crtc *crtc,
-@@ -109,6 +111,8 @@ static void meson_crtc_atomic_disable(struct drm_crtc *crtc,
+@@ -110,6 +112,8 @@ static void meson_crtc_atomic_disable(struct drm_crtc *crtc,
  	struct meson_crtc *meson_crtc = to_meson_crtc(crtc);
  	struct meson_drm *priv = meson_crtc->priv;
  
@@ -34,3 +35,4 @@ index 5155f01..c96686c 100644
  
 -- 
 2.7.4
+
