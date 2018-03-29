@@ -1,7 +1,7 @@
 From 26a7e0afbd5d8f39565d8b8d48d04096343ae0c0 Mon Sep 17 00:00:00 2001
 From: Neil Armstrong <narmstrong@baylibre.com>
 Date: Wed, 28 Feb 2018 16:07:18 +0100
-Subject: [PATCH 01/68] drm/meson: Call drm_crtc_vblank_on /
+Subject: [PATCH 01/69] drm/meson: Call drm_crtc_vblank_on /
  drm_crtc_vblank_off
 
 Make sure that the CRTC code will call the enable/disable_vblank hooks.
