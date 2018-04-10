@@ -1,4 +1,4 @@
-From 6e61f788230e5a0120b5cfb6b7d09922517a64af Mon Sep 17 00:00:00 2001
+From 4215ca2e443ef27ce5cceb7632e138e44dd6223a Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:09 +0100
 Subject: [PATCH 55/69] ath10k: remove htt pending TX count for high latency

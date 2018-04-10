@@ -1,4 +1,4 @@
-From da09675cb681338b465d3f32094d80bd75cff743 Mon Sep 17 00:00:00 2001
+From f5e16965a72fbca95036c1c0f3da9e4ce7b4c7f0 Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:16 +0100
 Subject: [PATCH 66/69] ath10k_sdio: virtual scatter gather for receive

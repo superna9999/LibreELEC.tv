@@ -1,4 +1,4 @@
-From b50144d7f713ce3b75a6b484dd9ab7b3311662fa Mon Sep 17 00:00:00 2001
+From 0b547a728c21b19db4c0c58ac72664add20a9058 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:06 +0100
 Subject: [PATCH 16/69] usb: host: xhci-mtk: remove custom USB PHY handling

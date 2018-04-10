@@ -1,4 +1,4 @@
-From b644736174f67b9d61e684a6d0f03acd7b5a9a43 Mon Sep 17 00:00:00 2001
+From 607c91247af1c1670cf8f7521ff25e321b0b11f7 Mon Sep 17 00:00:00 2001
 From: Neil Armstrong <narmstrong@baylibre.com>
 Date: Fri, 23 Feb 2018 12:40:30 +0100
 Subject: [PATCH 04/69] drm: bridge: dw-hdmi: Fix overflow workaround for

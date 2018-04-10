@@ -1,4 +1,4 @@
-From 4b23d611d15f2e79c70cf4af67241ed579e0dfdb Mon Sep 17 00:00:00 2001
+From bc56eef40cca51bc9a4164b79d99d4e0b5eaddb7 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:05 +0100
 Subject: [PATCH 49/69] ath10k: add HTT TX HL ops

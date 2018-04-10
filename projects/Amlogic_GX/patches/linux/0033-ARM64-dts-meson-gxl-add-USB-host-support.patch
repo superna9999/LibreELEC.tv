@@ -1,4 +1,4 @@
-From ae48b86169ad43ea48520458a9daa0778fa3fe52 Mon Sep 17 00:00:00 2001
+From 5db809fb9a83f081022dd428b47345b9d6f09db1 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:43 +0100
 Subject: [PATCH 33/69] ARM64: dts: meson-gxl: add USB host support

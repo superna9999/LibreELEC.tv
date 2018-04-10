@@ -1,4 +1,4 @@
-From a9119a4745824164f1aca50f0b1745293b7c9322 Mon Sep 17 00:00:00 2001
+From a62eb8bd05098789eaef3a255a9b6478b590ce7f Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:19 +0100
 Subject: [PATCH 69/69] ath10k: usb: add sparklan usb support

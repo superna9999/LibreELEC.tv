@@ -1,4 +1,4 @@
-From 886490637e3a5cf6806991b66f128d6825238cce Mon Sep 17 00:00:00 2001
+From 0706b52a4cb45d7518e53c61accbaed38877bcf3 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:10 +0100
 Subject: [PATCH 56/69] ath10k: add QCA9377 usb hw_param item

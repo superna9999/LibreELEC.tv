@@ -1,4 +1,4 @@
-From 660396a69fe65ad9d20201037a79a9e5b25ee8bf Mon Sep 17 00:00:00 2001
+From e1ebfaecbe4ec25e45427e2b16d83bffe023310f Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:00 +0100
 Subject: [PATCH 42/69] ath10k: add struct ath10k_bus_params

@@ -1,4 +1,4 @@
-From 867b7f8dfe7c7930d21b14f1c55367fa5b203e89 Mon Sep 17 00:00:00 2001
+From 7163037cbff3b726e0ae5e6037b3451405bc79e8 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:02 +0100
 Subject: [PATCH 45/69] ath10k: per target config of max_num_peers

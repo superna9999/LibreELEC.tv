@@ -1,4 +1,4 @@
-From cdd38f0749f9a50b8656b34bca4cd0d168be0801 Mon Sep 17 00:00:00 2001
+From dc5731df13dc07b25b88a868e47ffab1862165a6 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:06 +0100
 Subject: [PATCH 51/69] ath10k: htt: RX ring config HL support

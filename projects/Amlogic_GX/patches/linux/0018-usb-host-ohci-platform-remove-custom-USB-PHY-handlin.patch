@@ -1,4 +1,4 @@
-From 4af846d749a635095edb96f0f6d7b918f56c5e49 Mon Sep 17 00:00:00 2001
+From df5cba2ab3032ad27dc7492fba128bc486ad898e Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:08 +0100
 Subject: [PATCH 18/69] usb: host: ohci-platform: remove custom USB PHY

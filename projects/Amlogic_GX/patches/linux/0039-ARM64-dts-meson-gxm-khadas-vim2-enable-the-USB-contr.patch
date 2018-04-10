@@ -1,4 +1,4 @@
-From 110263749edc8116e3c79bcfa66ea0c065a78a86 Mon Sep 17 00:00:00 2001
+From 3c2eb09e04ee52b01a1bf382643690471dc6fb75 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:49 +0100
 Subject: [PATCH 39/69] ARM64: dts: meson-gxm-khadas-vim2: enable the USB

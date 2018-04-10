@@ -1,4 +1,4 @@
-From 3df5ce54f0a45ba6e3e65092ea2474d9a62232db Mon Sep 17 00:00:00 2001
+From be5b9da6b07ea6b51b856ab4cf1496e1626a4003 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sun, 28 Jan 2018 21:22:44 +0100
 Subject: [PATCH 22/69] phy: amlogic: phy-meson-gxl-usb2: don't log an error on

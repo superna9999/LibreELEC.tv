@@ -1,4 +1,4 @@
-From 15f619ae229348307b133a1a6a0e21b4582277f3 Mon Sep 17 00:00:00 2001
+From 5f6c9a39a1f824b928005f117d0f8fb190fae36d Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:13 +0100
 Subject: [PATCH 61/69] ath10k_sdio: reduce transmit msdu count

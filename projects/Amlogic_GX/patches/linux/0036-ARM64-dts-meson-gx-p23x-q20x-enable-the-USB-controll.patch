@@ -1,4 +1,4 @@
-From 85c9140b93b6eb0216875831aa1ce7c57148831d Mon Sep 17 00:00:00 2001
+From c868b1e63fee8665d805f1f9bf68a296b52950a5 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:46 +0100
 Subject: [PATCH 36/69] ARM64: dts: meson-gx-p23x-q20x: enable the USB

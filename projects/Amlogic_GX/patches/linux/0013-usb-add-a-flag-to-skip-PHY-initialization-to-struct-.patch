@@ -1,4 +1,4 @@
-From e9189534c7420c4b3dfa9e97efa79295138a195c Mon Sep 17 00:00:00 2001
+From 51d8bb3831e643afc86fc980c67be42d94f966e1 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:03 +0100
 Subject: [PATCH 13/69] usb: add a flag to skip PHY initialization to struct
@@ -148,7 +148,7 @@ index 1e6c954..62ef36a 100644
  		}
  
 diff --git a/drivers/usb/host/xhci-plat.c b/drivers/usb/host/xhci-plat.c
-index 6f03830..6700e5e 100644
+index 6652e2d..df327dc 100644
 --- a/drivers/usb/host/xhci-plat.c
 +++ b/drivers/usb/host/xhci-plat.c
 @@ -284,6 +284,7 @@ static int xhci_plat_probe(struct platform_device *pdev)

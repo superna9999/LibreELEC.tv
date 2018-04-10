@@ -1,4 +1,4 @@
-From 255852b9b9851da757bb6258d0179b8517d3274c Mon Sep 17 00:00:00 2001
+From c72f8aca89685b7da788762ef5ef3155b6d12bf2 Mon Sep 17 00:00:00 2001
 From: Jerome Brunet <jbrunet@baylibre.com>
 Date: Thu, 30 Mar 2017 12:14:40 +0200
 Subject: [PATCH 08/69] ASoC: meson: add aiu i2s dma support

@@ -1,4 +1,4 @@
-From 3c6aadb6e3f215d13725d1f72c60e1223a713c55 Mon Sep 17 00:00:00 2001
+From 020672243dc287a9b9d2c8f1712a96ea2ca00340 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sun, 28 Jan 2018 21:22:42 +0100
 Subject: [PATCH 20/69] phy: amlogic: phy-meson-gxl-usb2: support the clock and

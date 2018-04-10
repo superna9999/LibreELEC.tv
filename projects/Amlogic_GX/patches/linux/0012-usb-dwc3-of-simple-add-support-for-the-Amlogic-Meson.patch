@@ -1,4 +1,4 @@
-From 2adb38a0d6b5ec7357d66875f24a8247d70ca8e6 Mon Sep 17 00:00:00 2001
+From 1b73641954beef6f742024a150c1c98f740202b9 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sun, 11 Feb 2018 22:15:17 +0100
 Subject: [PATCH 12/69] usb: dwc3: of-simple: add support for the Amlogic Meson

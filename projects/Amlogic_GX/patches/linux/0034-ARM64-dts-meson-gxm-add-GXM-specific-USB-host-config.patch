@@ -1,4 +1,4 @@
-From 1b7cb15cb474ca7e2635477a7bdd1620c5992c24 Mon Sep 17 00:00:00 2001
+From 693d43023a2b3590289151ceb68b959ff750b5d8 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:44 +0100
 Subject: [PATCH 34/69] ARM64: dts: meson-gxm: add GXM specific USB host

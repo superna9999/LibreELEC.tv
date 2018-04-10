@@ -1,4 +1,4 @@
-From 3e16f1067394ae6fd1491e1f7ebb8df7cd8f2d3a Mon Sep 17 00:00:00 2001
+From 60b831bec52cd56ce96eb0e959a07de46e6bc4d2 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sun, 28 Jan 2018 21:22:43 +0100
 Subject: [PATCH 21/69] phy: amlogic: phy-meson-gxl-usb2: default to host mode

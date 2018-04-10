@@ -1,4 +1,4 @@
-From 27e2d15570025517b689fcce515d3bea621cfdc5 Mon Sep 17 00:00:00 2001
+From e76b19125114f7203bf77402a2428ed4683aa5d6 Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:11 +0100
 Subject: [PATCH 58/69] ath10k_sdio: sdio htt data transfer fixes

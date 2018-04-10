@@ -1,4 +1,4 @@
-From 7a1a5f42885cb771ea6a2dd804da3fe354efa51d Mon Sep 17 00:00:00 2001
+From 34f29f9bf9cde5e5b257162430029686d4309c74 Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:15 +0100
 Subject: [PATCH 64/69] ath10k_sdio: fix rssi indication

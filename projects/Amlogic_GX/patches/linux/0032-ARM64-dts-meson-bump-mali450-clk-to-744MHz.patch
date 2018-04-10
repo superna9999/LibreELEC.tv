@@ -1,4 +1,4 @@
-From 5fad8fa54c590f68eb8c4850e10cfaacfca3e0a2 Mon Sep 17 00:00:00 2001
+From 48f7f2afb989f5e64cb5dbb3994072729d2d7da1 Mon Sep 17 00:00:00 2001
 From: Neil Armstrong <narmstrong@baylibre.com>
 Date: Fri, 23 Feb 2018 11:18:11 +0100
 Subject: [PATCH 32/69] ARM64: dts: meson: bump mali450 clk to 744MHz
@@ -10,7 +10,7 @@ Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
  2 files changed, 14 insertions(+), 8 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb.dtsi b/arch/arm64/boot/dts/amlogic/meson-gxbb.dtsi
-index 3290a4d..6013d32 100644
+index 421d34f..37b80e2 100644
 --- a/arch/arm64/boot/dts/amlogic/meson-gxbb.dtsi
 +++ b/arch/arm64/boot/dts/amlogic/meson-gxbb.dtsi
 @@ -284,14 +284,17 @@

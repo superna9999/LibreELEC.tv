@@ -1,4 +1,4 @@
-From ae57e430ee0c82eed811cdf2e79b4f3f632fd90c Mon Sep 17 00:00:00 2001
+From 460f3ce0757d6a75b5990ec936162279a0dd0d16 Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:17 +0100
 Subject: [PATCH 67/69] ath10k_sdio: hif start once addition

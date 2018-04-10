@@ -1,4 +1,4 @@
-From 4fd6d86abfa6fed0cddeca1ec5dcf813c9139c92 Mon Sep 17 00:00:00 2001
+From a38fbf36fd70b9e7c44475fd1be07b95ba4fde14 Mon Sep 17 00:00:00 2001
 From: Jerome Brunet <jbrunet@baylibre.com>
 Date: Thu, 30 Mar 2017 12:17:27 +0200
 Subject: [PATCH 09/69] ASoC: meson: add initial i2s dai support

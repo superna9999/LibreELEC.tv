@@ -1,4 +1,4 @@
-From ba8839c40b322a8866f9330c529a9c73ea3bb3ff Mon Sep 17 00:00:00 2001
+From 266957c25ac784d61036d671653bff5f6a9ac4da Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:09 +0100
 Subject: [PATCH 19/69] usb: core: hcd: remove support for initializing a

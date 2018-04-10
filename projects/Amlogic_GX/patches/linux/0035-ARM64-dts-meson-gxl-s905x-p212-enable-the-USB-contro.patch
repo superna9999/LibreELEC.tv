@@ -1,4 +1,4 @@
-From e005d1990940d57d5d13eeee40d7d6c3c8be274e Mon Sep 17 00:00:00 2001
+From 62916862add085d60781e29d36a08252a95378aa Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:45 +0100
 Subject: [PATCH 35/69] ARM64: dts: meson-gxl-s905x-p212: enable the USB

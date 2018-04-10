@@ -1,4 +1,4 @@
-From c4294d5ac4ff25d3433d2b448c13dfecdb1e50d1 Mon Sep 17 00:00:00 2001
+From 1418df9aba1b80611c80295695f533a20683ba1d Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:03 +0100
 Subject: [PATCH 47/69] ath10k: various fixes for high latency devices

@@ -1,4 +1,4 @@
-From 3e3137651db5f0f9b131ba27499b61ebfa0531e6 Mon Sep 17 00:00:00 2001
+From c27598cfd9c63940e3f326e21f052ffc6440e5fd Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sun, 11 Feb 2018 22:15:16 +0100
 Subject: [PATCH 11/69] usb: dwc3: of-simple: add support for shared and pulsed

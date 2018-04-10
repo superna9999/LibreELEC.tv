@@ -1,4 +1,4 @@
-From 96e02e54fc5f387a24a2147da0eb123bc68c9847 Mon Sep 17 00:00:00 2001
+From 20705cd911573220254947a6338b0804d1382720 Mon Sep 17 00:00:00 2001
 From: Matthias Reichl <hias@horus.com>
 Date: Tue, 23 Jan 2018 09:40:02 +0100
 Subject: [PATCH 05/69] media: rc: meson-ir: add timeout on idle
