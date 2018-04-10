@@ -1,4 +1,4 @@
-From 3ead35ce218b91335d1b30cda690b5827d3283fc Mon Sep 17 00:00:00 2001
+From 429349eb5fcff19023dffa10ff6ed6a6f3b4a503 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:48 +0100
 Subject: [PATCH 38/69] ARM64: dts: meson-gxl-nexbox-a95x: enable the USB

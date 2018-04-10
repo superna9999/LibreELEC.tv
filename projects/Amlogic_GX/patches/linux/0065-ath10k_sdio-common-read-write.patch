@@ -1,4 +1,4 @@
-From e1ab12640eb9188fa897906a893ca77c8aa00d2e Mon Sep 17 00:00:00 2001
+From d02c6f790cc7f4ca58066147991b34723409a69a Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:16 +0100
 Subject: [PATCH 65/69] ath10k_sdio: common read write

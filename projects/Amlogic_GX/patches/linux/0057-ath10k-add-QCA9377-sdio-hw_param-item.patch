@@ -1,4 +1,4 @@
-From 82286754aead0eabceb1ca969a2db65976d6393b Mon Sep 17 00:00:00 2001
+From c730645c79043c14fa0a1709cfe5023ac86fa4a8 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:10 +0100
 Subject: [PATCH 57/69] ath10k: add QCA9377 sdio hw_param item

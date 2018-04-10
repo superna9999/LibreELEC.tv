@@ -1,4 +1,4 @@
-From cb1c38d745aee3663229b05b802b7b3f9dd3609e Mon Sep 17 00:00:00 2001
+From 3737a86639c49125659e6abb2ba84d62ceae9705 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:08 +0100
 Subject: [PATCH 53/69] ath10k: htt: High latency RX support

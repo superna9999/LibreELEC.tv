@@ -1,4 +1,4 @@
-From 9922ac58348d08d931700065b1ba822886f74c9d Mon Sep 17 00:00:00 2001
+From 06ecc336c5c6d7509d5baf9c1a9a3b539289f0a0 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:27:59 +0100
 Subject: [PATCH 40/69] ath10k: add inlined wrappers for htt tx ops

@@ -1,4 +1,4 @@
-From 8984de5ca69857201e7b18f36fdde4a0bde3c291 Mon Sep 17 00:00:00 2001
+From 4073dc0b489d38f0f56ad3baba108b57c6756911 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:04 +0100
 Subject: [PATCH 14/69] usb: core: add a wrapper for the USB PHYs on the HCD

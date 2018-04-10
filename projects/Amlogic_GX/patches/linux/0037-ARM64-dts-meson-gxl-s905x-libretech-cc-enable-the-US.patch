@@ -1,4 +1,4 @@
-From c2df822e2524b4477a0fc8962821be679fa64ee7 Mon Sep 17 00:00:00 2001
+From b9ae5df14166530301c99b0ed61024afc0297a40 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Mon, 12 Mar 2018 22:42:47 +0100
 Subject: [PATCH 37/69] ARM64: dts: meson-gxl-s905x-libretech-cc: enable the

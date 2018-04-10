@@ -1,4 +1,4 @@
-From bf33820c1874df56409e042432f5b8e25313dec7 Mon Sep 17 00:00:00 2001
+From e9701fff93b30930bcf4d526a031fa9555e11149 Mon Sep 17 00:00:00 2001
 From: Jerome Brunet <jbrunet@baylibre.com>
 Date: Tue, 14 Feb 2017 19:18:04 +0100
 Subject: [PATCH 02/69] drm/meson: select dw-hdmi i2s audio for meson hdmi

@@ -1,4 +1,4 @@
-From 381494471d48f018e9daafd47b6859f50a422f81 Mon Sep 17 00:00:00 2001
+From ad5824fec02c58b8043f71b5a27f9b3b6b05ac37 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:05 +0100
 Subject: [PATCH 15/69] usb: core: hcd: integrate the PHY wrapper into the HCD

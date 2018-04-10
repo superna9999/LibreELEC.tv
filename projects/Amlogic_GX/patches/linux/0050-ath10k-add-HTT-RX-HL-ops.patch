@@ -1,4 +1,4 @@
-From 3c8f85d686b1233b3ebc37408782ecd5fba266a7 Mon Sep 17 00:00:00 2001
+From 405c6e7577ea8a665564056bff6c1d4b816a5b76 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:06 +0100
 Subject: [PATCH 50/69] ath10k: add HTT RX HL ops

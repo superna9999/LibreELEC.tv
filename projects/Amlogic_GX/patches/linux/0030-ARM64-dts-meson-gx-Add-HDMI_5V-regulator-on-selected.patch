@@ -1,4 +1,4 @@
-From 308c98f063cd7f2825fff24bca681d974377432b Mon Sep 17 00:00:00 2001
+From ec4aab62fffd5c7eb13ed55a766b4513e1a9b3ae Mon Sep 17 00:00:00 2001
 From: Neil Armstrong <narmstrong@baylibre.com>
 Date: Mon, 16 Oct 2017 15:33:30 +0200
 Subject: [PATCH 30/69] ARM64: dts: meson-gx: Add HDMI_5V regulator on selected

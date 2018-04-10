@@ -1,4 +1,4 @@
-From f648c426f1d22d9fe32a6f6f622eab22a8eaf4ee Mon Sep 17 00:00:00 2001
+From c029b0ea393d35232abd521b4baabc423424d9a7 Mon Sep 17 00:00:00 2001
 From: Jerome Brunet <jbrunet@baylibre.com>
 Date: Fri, 31 Mar 2017 15:55:03 +0200
 Subject: [PATCH 27/69] ARM64: defconfig: enable audio support for meson SoCs

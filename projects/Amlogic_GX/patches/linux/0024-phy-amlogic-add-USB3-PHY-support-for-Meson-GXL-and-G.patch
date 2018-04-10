@@ -1,4 +1,4 @@
-From d539b863437c2ab91482b8f577dab71e723cdab5 Mon Sep 17 00:00:00 2001
+From 68f239e5d3d44940f9a0c37f97a33bae3077d066 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 19:47:00 +0100
 Subject: [PATCH 24/69] phy: amlogic: add USB3 PHY support for Meson GXL and

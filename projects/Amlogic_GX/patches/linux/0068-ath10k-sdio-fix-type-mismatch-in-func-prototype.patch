@@ -1,4 +1,4 @@
-From c89386487d40cefa9b01c5e3d51b65bcded4e6d7 Mon Sep 17 00:00:00 2001
+From 89b30b81193c20938d6dbcb8a4af8313859a9223 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:18 +0100
 Subject: [PATCH 68/69] ath10k: sdio: fix type mismatch in func prototype

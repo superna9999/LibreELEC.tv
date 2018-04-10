@@ -1,4 +1,4 @@
-From 2c4abf733530d682690684edd1f7b778da2db87e Mon Sep 17 00:00:00 2001
+From 6c107509924d9ff74feb93c830226603f123e884 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:01 +0100
 Subject: [PATCH 43/69] ath10k: high_latency detection

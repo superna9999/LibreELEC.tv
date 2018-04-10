@@ -1,4 +1,4 @@
-From 44e86a2971771805c993f20dfda6e6847dbf2713 Mon Sep 17 00:00:00 2001
+From 55c83223678eaa7423b8db0798e62217bcf999cb Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sat, 3 Mar 2018 22:43:07 +0100
 Subject: [PATCH 17/69] usb: host: ehci-platform: remove custom USB PHY

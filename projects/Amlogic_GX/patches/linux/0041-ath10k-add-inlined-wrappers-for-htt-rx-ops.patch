@@ -1,4 +1,4 @@
-From d06d6763686b01b37f63bfe0abc948aa65b6ab89 Mon Sep 17 00:00:00 2001
+From 742add40dceb12da33f5547566bd258d1e316e5e Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:27:59 +0100
 Subject: [PATCH 41/69] ath10k: add inlined wrappers for htt rx ops

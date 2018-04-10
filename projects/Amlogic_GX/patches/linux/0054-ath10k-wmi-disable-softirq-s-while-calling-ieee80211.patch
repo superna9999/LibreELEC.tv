@@ -1,4 +1,4 @@
-From b01a8cb242a98a8a6472a134661eed7bdad274fe Mon Sep 17 00:00:00 2001
+From ced424e738de17c046ced1bfcff28b4eccfc4bbd Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:08 +0100
 Subject: [PATCH 54/69] ath10k: wmi: disable softirq's while calling

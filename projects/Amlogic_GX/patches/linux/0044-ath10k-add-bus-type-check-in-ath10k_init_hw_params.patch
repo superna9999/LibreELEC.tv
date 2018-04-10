@@ -1,4 +1,4 @@
-From 25d414fb07f9e20da4812cdc6e2f78708d585643 Mon Sep 17 00:00:00 2001
+From e46ce5442e67fc8f31953115f6eac27952680ebc Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:01 +0100
 Subject: [PATCH 44/69] ath10k: add bus type check in ath10k_init_hw_params

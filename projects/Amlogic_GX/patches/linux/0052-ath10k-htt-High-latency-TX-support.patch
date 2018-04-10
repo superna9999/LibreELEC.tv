@@ -1,4 +1,4 @@
-From 34913fdb4058806d5adc6f0e9f771cd963f86b89 Mon Sep 17 00:00:00 2001
+From 2ea079a913e3c8232ecb4bb61a315ae55939b350 Mon Sep 17 00:00:00 2001
 From: Erik Stromdahl <erik.stromdahl@gmail.com>
 Date: Sun, 25 Feb 2018 21:28:07 +0100
 Subject: [PATCH 52/69] ath10k: htt: High latency TX support

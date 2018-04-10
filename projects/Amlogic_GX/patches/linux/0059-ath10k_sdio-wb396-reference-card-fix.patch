@@ -1,4 +1,4 @@
-From 8629ec7fa69a88c361c7b7d3ec2bbdb6081b9ea1 Mon Sep 17 00:00:00 2001
+From ea28dd63dff2b5fa3030234bc9ab794f10809b2f Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:12 +0100
 Subject: [PATCH 59/69] ath10k_sdio: wb396 reference card fix

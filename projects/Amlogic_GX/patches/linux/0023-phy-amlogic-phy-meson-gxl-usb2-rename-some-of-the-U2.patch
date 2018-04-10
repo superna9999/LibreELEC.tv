@@ -1,4 +1,4 @@
-From 78a5bf084e1aa92693c2df6a95ff92a4d225a5ee Mon Sep 17 00:00:00 2001
+From 88602908d07b11b09f5d1b91c2a126dfeb7c4a91 Mon Sep 17 00:00:00 2001
 From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 Date: Sun, 28 Jan 2018 21:22:45 +0100
 Subject: [PATCH 23/69] phy: amlogic: phy-meson-gxl-usb2: rename some of the

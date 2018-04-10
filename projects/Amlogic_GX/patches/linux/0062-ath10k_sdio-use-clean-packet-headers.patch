@@ -1,4 +1,4 @@
-From 8da6efada1d5db61fbae54131329f71a59db00c1 Mon Sep 17 00:00:00 2001
+From f4e71a48e3f255e789ceb4d423cb904b59565ada Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:14 +0100
 Subject: [PATCH 62/69] ath10k_sdio: use clean packet headers

@@ -1,4 +1,4 @@
-From fde7647b441953e67cc1f60b000cb9684f2bcc8e Mon Sep 17 00:00:00 2001
+From 6b5e7b424cf63c6ee8eb5b1832dd536147b1739d Mon Sep 17 00:00:00 2001
 From: Alagu Sankar <alagusankar@silex-india.com>
 Date: Sun, 25 Feb 2018 21:28:14 +0100
 Subject: [PATCH 63/69] ath10k_sdio: high latency fixes for beacon buffer
