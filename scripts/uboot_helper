@@ -58,6 +58,10 @@ devices = {
         'dtb' : 'imx6q-udoo.dtb',
         'config' : 'udoo_defconfig'
       },
+      'var-dt6customboard' : {
+	'dtb' : 'imx6q-var-dt6customboard.dtb',
+	'config' : 'dt6customboard_defconfig'
+      },
     },
   },
 }
