@@ -1,0 +1,875 @@
+From f57b1aed3128055a4a80da94d2a16ca6ff185e8b Mon Sep 17 00:00:00 2001
+From: Neil Armstrong <narmstrong@baylibre.com>
+Date: Thu, 23 Nov 2017 15:38:56 +0100
+Subject: [PATCH 1/3] ARM: dts: sync with 4.14 and submitted DT
+
+Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
+---
+ arch/arm/dts/Makefile                      |   1 +
+ arch/arm/dts/imx6dl-pinfunc.h              |   1 +
+ arch/arm/dts/imx6q-pinfunc.h               |   1 +
+ arch/arm/dts/imx6q-var-dt6customboard.dts  | 240 ++++++++++++++
+ arch/arm/dts/imx6qdl-var-dart.dtsi         | 503 +++++++++++++++++++++++++++++
+ include/dt-bindings/sound/fsl-imx-audmux.h |  57 ++++
+ 6 files changed, 803 insertions(+)
+ create mode 100644 arch/arm/dts/imx6q-var-dt6customboard.dts
+ create mode 100644 arch/arm/dts/imx6qdl-var-dart.dtsi
+ create mode 100644 include/dt-bindings/sound/fsl-imx-audmux.h
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 762429c..37a388e 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -358,6 +358,7 @@ dtb-$(CONFIG_MX6) += imx6ull-14x14-evk.dtb \
+ 	imx6dl-icore.dtb \
+ 	imx6dl-icore-rqs.dtb \
+ 	imx6q-cm-fx6.dtb \
++	imx6q-var-dt6customboard.dtb \
+ 	imx6q-icore.dtb \
+ 	imx6q-icore-rqs.dtb \
+ 	imx6q-logicpd.dtb \
+diff --git a/arch/arm/dts/imx6dl-pinfunc.h b/arch/arm/dts/imx6dl-pinfunc.h
+index 0ead323..37e430a 100644
+--- a/arch/arm/dts/imx6dl-pinfunc.h
++++ b/arch/arm/dts/imx6dl-pinfunc.h
+@@ -668,6 +668,7 @@
+ #define MX6QDL_PAD_ENET_RX_ER__SPDIF_IN             0x1f4 0x5c4 0x8f0 0x3 0x1
+ #define MX6QDL_PAD_ENET_RX_ER__ENET_1588_EVENT2_OUT 0x1f4 0x5c4 0x000 0x4 0x0
+ #define MX6QDL_PAD_ENET_RX_ER__GPIO1_IO24           0x1f4 0x5c4 0x000 0x5 0x0
++#define MX6QDL_PAD_ENET_RXD0__OSC32K_32K_OUT        0x1f8 0x5c8 0x000 0x0 0x0
+ #define MX6QDL_PAD_ENET_RXD0__ENET_RX_DATA0         0x1f8 0x5c8 0x818 0x1 0x0
+ #define MX6QDL_PAD_ENET_RXD0__ESAI_TX_HF_CLK        0x1f8 0x5c8 0x838 0x2 0x0
+ #define MX6QDL_PAD_ENET_RXD0__SPDIF_OUT             0x1f8 0x5c8 0x000 0x3 0x0
+diff --git a/arch/arm/dts/imx6q-pinfunc.h b/arch/arm/dts/imx6q-pinfunc.h
+index 9fc6120..cfb11d3 100644
+--- a/arch/arm/dts/imx6q-pinfunc.h
++++ b/arch/arm/dts/imx6q-pinfunc.h
+@@ -551,6 +551,7 @@
+ #define MX6QDL_PAD_ENET_RXD1__ESAI_TX_FS            0x1e0 0x4f4 0x860 0x2 0x0
+ #define MX6QDL_PAD_ENET_RXD1__ENET_1588_EVENT3_OUT  0x1e0 0x4f4 0x000 0x4 0x0
+ #define MX6QDL_PAD_ENET_RXD1__GPIO1_IO26            0x1e0 0x4f4 0x000 0x5 0x0
++#define MX6QDL_PAD_ENET_RXD0__OSC32K_32K_OUT        0x1e4 0x4f8 0x000 0x0 0x0
+ #define MX6QDL_PAD_ENET_RXD0__ENET_RX_DATA0         0x1e4 0x4f8 0x848 0x1 0x1
+ #define MX6QDL_PAD_ENET_RXD0__ESAI_TX_HF_CLK        0x1e4 0x4f8 0x868 0x2 0x0
+ #define MX6QDL_PAD_ENET_RXD0__SPDIF_OUT             0x1e4 0x4f8 0x000 0x3 0x0
+diff --git a/arch/arm/dts/imx6q-var-dt6customboard.dts b/arch/arm/dts/imx6q-var-dt6customboard.dts
+new file mode 100644
+index 0000000..f6beb66
+--- /dev/null
++++ b/arch/arm/dts/imx6q-var-dt6customboard.dts
+@@ -0,0 +1,240 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Support for Variscite DART-MX6 Carrier-board
++ *
++ * Copyright 2017 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ */
++
++/dts-v1/;
++
++#include "imx6q.dtsi"
++#include "imx6qdl-var-dart.dtsi"
++#include <dt-bindings/input/linux-event-codes.h>
++
++/ {
++	model = "Variscite DART-MX6 Carrier-board";
++	compatible = "variscite,dt6customboard", "fsl,imx6q";
++
++	backlight_lvds: backlight {
++		compatible = "pwm-backlight";
++		pwms = <&pwm2 0 50000>;
++		brightness-levels = <0 4 8 16 32 64 128 248>;
++		default-brightness-level = <7>;
++		status = "okay";
++	};
++
++	gpio-keys {
++		compatible = "gpio-keys";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		autorepeat;
++
++		back {
++			gpios = <&gpio4 26 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_BACK>;
++			label = "Key Back";
++			linux,input-type = <1>;
++			debounce-interval = <100>;
++			wakeup-source;
++		};
++
++		home {
++			gpios = <&gpio5 11 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_HOME>;
++			label = "Key Home";
++			linux,input-type = <1>;
++			debounce-interval = <100>;
++			wakeup-source;
++		};
++
++		menu {
++			gpios = <&gpio4 25 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_MENU>;
++			label = "Key Menu";
++			linux,input-type = <1>;
++			debounce-interval = <100>;
++			wakeup-source;
++		};
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++
++		led1 {
++			gpios = <&gpio4 27 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++		};
++
++		led2 {
++			gpios = <&gpio4 28 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "default-on";
++		};
++	};
++
++	panel1: lvds-panel {
++		compatible = "sgd,gktw70sdae4se", "panel-lvds";
++		backlight = <&backlight_lvds>;
++		width-mm = <153>;
++		height-mm = <86>;
++		label = "gktw70sdae4se";
++		data-mapping = "jeida-18";
++
++		panel-timing {
++			clock-frequency = <32000000>;
++			hactive = <800>;
++			vactive = <480>;
++			hback-porch = <39>;
++			hfront-porch = <39>;
++			vback-porch = <29>;
++			vfront-porch = <13>;
++			hsync-len = <47>;
++			vsync-len = <2>;
++		};
++
++		port {
++			panel_in: endpoint {
++				remote-endpoint = <&lvds1_out>;
++			};
++		};
++	};
++
++	reg_usb_h1_vbus: regulator-usbh1vbus {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_h1_vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpio = <&gpio1 28 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	reg_usb_otg_vbus: regulator-usbotgvbus {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_otg_vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpio = <&gpio4 15 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	sound {
++		compatible = "simple-audio-card";
++		simple-audio-card,name = "dt6-customboard-audio";
++		simple-audio-card,format = "i2s";
++		simple-audio-card,bitclock-master = <&sound_codec>;
++		simple-audio-card,frame-master = <&sound_codec>;
++		simple-audio-card,widgets = "Headphone", "Headphone Jack",
++					    "Line", "Line In";
++		simple-audio-card,routing = "Headphone Jack", "HPLOUT",
++					    "Headphone Jack", "HPROUT",
++					    "LINE1L", "Line In",
++					    "LINE1R", "Line In";
++
++		sound_cpu: simple-audio-card,cpu {
++			sound-dai = <&ssi2>;
++		};
++
++		sound_codec: simple-audio-card,codec {
++			sound-dai = <&tlv320aic3106>;
++			clocks = <&clks IMX6QDL_CLK_CKO>;
++		};
++	};
++};
++
++&can1 {
++	status = "okay";
++};
++
++&ecspi1 {
++	cs-gpios = <&gpio4 9 GPIO_ACTIVE_HIGH>,
++		   <&gpio4 10 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++};
++
++&fec {
++	status = "okay";
++	phy-mode = "rgmii";
++	phy-reset-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
++};
++
++&hdmi {
++	status = "okay";
++};
++
++&i2c1 {
++	clock-frequency = <100000>;
++	status = "okay";
++};
++
++&i2c3 {
++	clock-frequency = <100000>;
++	status = "okay";
++
++	touchscreen@38 {
++		compatible = "edt,edt-ft5x06";
++		reg = <0x38>;
++		interrupt-parent = <&gpio1>;
++		interrupts = <4 IRQ_TYPE_EDGE_FALLING>;
++		touchscreen-size-x = <800>;
++		touchscreen-size-y = <480>;
++		touchscreen-inverted-x;
++		touchscreen-inverted-y;
++	};
++
++	rtc@68 {
++		compatible = "isil,isl12057";
++		reg = <0x68>;
++	};
++};
++
++&ldb {
++	status = "okay";
++
++	lvds-channel@1 {
++		status = "okay";
++
++		port@4 {
++			reg = <4>;
++
++			lvds1_out: endpoint {
++				remote-endpoint = <&panel_in>;
++			};
++		};
++	};
++};
++
++&pwm2 {
++	status = "okay";
++};
++
++&uart1 {
++	status = "okay";
++};
++
++&uart3 {
++	status = "okay";
++};
++
++&usbh1 {
++	vbus-supply = <&reg_usb_h1_vbus>;
++	status = "okay";
++};
++
++&usbotg {
++	vbus-supply = <&reg_usb_otg_vbus>;
++	dr_mode = "otg";
++	srp-disable;
++	hnp-disable;
++	adp-disable;
++	status = "okay";
++};
++
++&usdhc2 {
++	cd-gpios = <&gpio1 6 GPIO_ACTIVE_LOW>;
++	status = "okay";
++};
++
++&snvs_pwrkey {
++	status = "okay";
++	linux,keycode = <KEY_POWER>;
++};
+diff --git a/arch/arm/dts/imx6qdl-var-dart.dtsi b/arch/arm/dts/imx6qdl-var-dart.dtsi
+new file mode 100644
+index 0000000..421d6f5
+--- /dev/null
++++ b/arch/arm/dts/imx6qdl-var-dart.dtsi
+@@ -0,0 +1,503 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Support for Variscite DART-MX6 Module
++ *
++ * Copyright 2017 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ */
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/sound/fsl-imx-audmux.h>
++
++/ {
++	memory {
++		reg = <0x10000000 0x40000000>;
++	};
++
++	reg_3p3v: regulator-3p3v {
++		compatible = "regulator-fixed";
++		regulator-name = "3P3V";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++	};
++
++	reg_wl18xx_vmmc: regulator-wl18xx {
++		compatible = "regulator-fixed";
++		regulator-name = "vwl1807";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		gpio = <&gpio7 8 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++		startup-delay-us = <70000>;
++	};
++};
++
++&audmux {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_audmux>;
++	status = "okay";
++
++	ssi2 {
++		fsl,audmux-port = <1>;
++		fsl,port-config = <
++			(IMX_AUDMUX_V2_PTCR_SYN |
++			IMX_AUDMUX_V2_PTCR_TFSDIR |
++			IMX_AUDMUX_V2_PTCR_TFSEL(2) |
++			IMX_AUDMUX_V2_PTCR_TCLKDIR |
++			IMX_AUDMUX_V2_PTCR_TCSEL(2))
++			IMX_AUDMUX_V2_PDCR_RXDSEL(2)
++		>;
++	};
++
++	aud3 {
++		fsl,audmux-port = <2>;
++		fsl,port-config = <
++			IMX_AUDMUX_V2_PTCR_SYN
++			IMX_AUDMUX_V2_PDCR_RXDSEL(1)
++		>;
++	};
++};
++
++&can1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexcan1>;
++	status = "disabled";
++};
++
++&can2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexcan2>;
++	status = "disabled";
++};
++
++&ecspi1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_ecspi1>;
++	status = "disabled";
++};
++
++&fec {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet>;
++	phy-mode = "rgmii";
++	status = "disabled";
++};
++
++&hdmi {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_hdmicec>;
++	ddc-i2c-bus = <&i2c1>;
++	status = "disabled";
++};
++
++&i2c1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c1>;
++	status = "disabled";
++};
++
++&i2c2 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c2>;
++	status = "okay";
++
++	pmic@8 {
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pmic>;
++		compatible = "fsl,pfuze100";
++		reg = <0x08>;
++
++		regulators {
++			sw1a_reg: sw1ab {
++				regulator-min-microvolt = <300000>;
++				regulator-max-microvolt = <1875000>;
++				regulator-boot-on;
++				regulator-always-on;
++				regulator-ramp-delay = <6250>;
++			};
++
++			sw1c_reg: sw1c {
++				regulator-min-microvolt = <300000>;
++				regulator-max-microvolt = <1875000>;
++				regulator-boot-on;
++				regulator-always-on;
++				regulator-ramp-delay = <6250>;
++			};
++
++			sw2_reg: sw2 {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			sw3a_reg: sw3a {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3950000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			sw3b_reg: sw3b {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3950000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			sw4_reg: sw4 {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3950000>;
++			};
++
++			snvs_reg: vsnvs {
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <3000000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			vref_reg: vrefddr {
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			vgen6_reg: vgen6 {
++				regulator-min-microvolt = <2800000>;
++				regulator-max-microvolt = <2800000>;
++				regulator-always-on;
++				regulator-boot-on;
++			};
++		};
++	};
++
++	tlv320aic3106: codec@1b {
++		compatible = "ti,tlv320aic3106";
++		reg = <0x1b>;
++		#sound-dai-cells = <0>;
++		DRVDD-supply = <&reg_3p3v>;
++		AVDD-supply = <&reg_3p3v>;
++		IOVDD-supply = <&reg_3p3v>;
++		DVDD-supply = <&reg_3p3v>;
++		ai3x-ocmv = <0>;
++		gpio-reset = <&gpio5 5 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&i2c3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c3>;
++	status = "disabled";
++};
++
++&iomuxc {
++	pinctrl_audmux: audmux {
++		fsl,pins = <
++			MX6QDL_PAD_CSI0_DAT7__AUD3_RXD		0x130b0
++			MX6QDL_PAD_CSI0_DAT4__AUD3_TXC		0x130b0
++			MX6QDL_PAD_CSI0_DAT5__AUD3_TXD		0x110b0
++			MX6QDL_PAD_CSI0_DAT6__AUD3_TXFS		0x130b0
++			/* Audio Clock */
++			MX6QDL_PAD_GPIO_0__CCM_CLKO1		0x130b0
++		>;
++	};
++
++	pinctrl_bt: bt {
++		fsl,pins = <
++			/* Bluetooth enable */
++			MX6QDL_PAD_SD3_DAT6__GPIO6_IO18		0x1b0b1
++			/* Bluetooth Slow Clock */
++			MX6QDL_PAD_ENET_RXD0__OSC32K_32K_OUT	0x000b0
++		>;
++	};
++
++	pinctrl_ecspi1: ecspi1grp {
++		fsl,pins = <
++			MX6QDL_PAD_KEY_COL1__ECSPI1_MISO	0x100b1
++			MX6QDL_PAD_KEY_ROW0__ECSPI1_MOSI	0x100b1
++			MX6QDL_PAD_KEY_COL0__ECSPI1_SCLK	0x100b1
++			/* SPI1 CS0 */
++			MX6QDL_PAD_KEY_ROW1__GPIO4_IO09		0x1b0b0
++			/* SPI1 CS1 */
++			MX6QDL_PAD_KEY_COL2__GPIO4_IO10		0x1b0b0
++		>;
++	};
++
++	pinctrl_enet: enetgrp {
++		fsl,pins = <
++			MX6QDL_PAD_ENET_MDIO__ENET_MDIO		0x100b0
++			MX6QDL_PAD_ENET_MDC__ENET_MDC		0x100b0
++			MX6QDL_PAD_RGMII_TXC__RGMII_TXC		0x10030
++			MX6QDL_PAD_RGMII_TD0__RGMII_TD0		0x10030
++			MX6QDL_PAD_RGMII_TD1__RGMII_TD1		0x10030
++			MX6QDL_PAD_RGMII_TD2__RGMII_TD2		0x10030
++			MX6QDL_PAD_RGMII_TD3__RGMII_TD3		0x10030
++			MX6QDL_PAD_RGMII_TX_CTL__RGMII_TX_CTL	0x10030
++			MX6QDL_PAD_ENET_REF_CLK__ENET_TX_CLK	0x100b0
++			MX6QDL_PAD_RGMII_RXC__RGMII_RXC		0x1b030
++			MX6QDL_PAD_RGMII_RD0__RGMII_RD0		0x1b030
++			MX6QDL_PAD_RGMII_RD1__RGMII_RD1		0x1b030
++			MX6QDL_PAD_RGMII_RD2__RGMII_RD2		0x1b030
++			MX6QDL_PAD_RGMII_RD3__RGMII_RD3		0x1b030
++			MX6QDL_PAD_RGMII_RX_CTL__RGMII_RX_CTL	0x1b030
++		>;
++	};
++
++	pinctrl_flexcan1: flexcan1grp {
++		fsl,pins = <
++			MX6QDL_PAD_GPIO_7__FLEXCAN1_TX	0x1b0b0
++			MX6QDL_PAD_GPIO_8__FLEXCAN1_RX	0x1b0b0
++		>;
++	};
++
++	pinctrl_flexcan2: flexcan2grp {
++		fsl,pins = <
++			MX6QDL_PAD_KEY_COL4__FLEXCAN2_TX	0x1b0b0
++			MX6QDL_PAD_KEY_ROW4__FLEXCAN2_RX	0x1b0b0
++		>;
++	};
++
++	pinctrl_hdmicec: hdmicecgrp {
++		fsl,pins = <
++			MX6QDL_PAD_KEY_ROW2__HDMI_TX_CEC_LINE	0x1f8b0
++		>;
++	};
++
++	pinctrl_i2c1: i2c1grp {
++		fsl,pins = <
++			MX6QDL_PAD_CSI0_DAT8__I2C1_SDA	0x4001b8b1
++			MX6QDL_PAD_CSI0_DAT9__I2C1_SCL	0x4001b8b1
++		>;
++	};
++
++	pinctrl_i2c2: i2c2grp {
++		fsl,pins = <
++			MX6QDL_PAD_KEY_COL3__I2C2_SCL	0x4001b8b1
++			MX6QDL_PAD_KEY_ROW3__I2C2_SDA	0x4001b8b1
++		>;
++	};
++
++	pinctrl_i2c3: i2c3grp {
++		fsl,pins = <
++			MX6QDL_PAD_GPIO_5__I2C3_SCL	0x4001b8b1
++			MX6QDL_PAD_GPIO_16__I2C3_SDA	0x4001b8b1
++		>;
++	};
++
++	pinctrl_pmic: pmicgrp {
++		fsl,pins = <
++			/* PMIC INT */
++			MX6QDL_PAD_GPIO_17__GPIO7_IO12	0x1b0b1
++		>;
++	};
++
++	pinctrl_pwm2: pwm2grp {
++		fsl,pins = <
++			MX6QDL_PAD_DISP0_DAT9__PWM2_OUT	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart1: uart1grp {
++		fsl,pins = <
++			MX6QDL_PAD_CSI0_DAT11__UART1_RX_DATA 0x1b0b1
++			MX6QDL_PAD_CSI0_DAT10__UART1_TX_DATA 0x1b0b1
++		>;
++	};
++
++	pinctrl_uart2: uart2grp {
++		fsl,pins = <
++			MX6QDL_PAD_SD3_DAT4__UART2_RX_DATA	0x1b0b1
++			MX6QDL_PAD_SD3_DAT5__UART2_TX_DATA	0x1b0b1
++			MX6QDL_PAD_SD4_DAT6__UART2_CTS_B	0x1b0b1
++			MX6QDL_PAD_SD4_DAT5__UART2_RTS_B	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart3: uart3grp {
++		fsl,pins = <
++			MX6QDL_PAD_EIM_D25__UART3_RX_DATA 0x1b0b1
++			MX6QDL_PAD_EIM_D24__UART3_TX_DATA 0x1b0b1
++			MX6QDL_PAD_EIM_D23__UART3_CTS_B   0x1b0b1
++			MX6QDL_PAD_EIM_EB3__UART3_RTS_B   0x1b0b1
++		>;
++	};
++
++	pinctrl_usbotg: usbotggrp {
++		fsl,pins = <
++			MX6QDL_PAD_ENET_RX_ER__USB_OTG_ID 0x17059
++		>;
++	};
++
++	pinctrl_usdhc1: usdhc1grp {
++		fsl,pins = <
++			MX6QDL_PAD_SD1_CMD__SD1_CMD	0x17059
++			MX6QDL_PAD_SD1_CLK__SD1_CLK	0x10059
++			MX6QDL_PAD_SD1_DAT0__SD1_DATA0	0x17059
++			MX6QDL_PAD_SD1_DAT1__SD1_DATA1	0x17059
++			MX6QDL_PAD_SD1_DAT2__SD1_DATA2	0x17059
++			MX6QDL_PAD_SD1_DAT3__SD1_DATA3	0x17059
++			/* WL_EN */
++			MX6QDL_PAD_SD3_DAT7__GPIO6_IO17 0x17071
++			/* WL_IRQ */
++			MX6QDL_PAD_SD3_RST__GPIO7_IO08  0x17071
++		>;
++	};
++
++	pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
++		fsl,pins = <
++			MX6QDL_PAD_SD1_CMD__SD1_CMD	0x170B9
++			MX6QDL_PAD_SD1_CLK__SD1_CLK	0x100B9
++			MX6QDL_PAD_SD1_DAT0__SD1_DATA0	0x170B9
++			MX6QDL_PAD_SD1_DAT1__SD1_DATA1	0x170B9
++			MX6QDL_PAD_SD1_DAT2__SD1_DATA2	0x170B9
++			MX6QDL_PAD_SD1_DAT3__SD1_DATA3	0x170B9
++		>;
++	};
++
++	pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
++		fsl,pins = <
++			MX6QDL_PAD_SD1_CMD__SD1_CMD	0x170F9
++			MX6QDL_PAD_SD1_CLK__SD1_CLK	0x100F9
++			MX6QDL_PAD_SD1_DAT0__SD1_DATA0	0x170F9
++			MX6QDL_PAD_SD1_DAT1__SD1_DATA1	0x170F9
++			MX6QDL_PAD_SD1_DAT2__SD1_DATA2	0x170F9
++			MX6QDL_PAD_SD1_DAT3__SD1_DATA3	0x170F9
++		>;
++	};
++
++	pinctrl_usdhc2: usdhc2grp {
++		fsl,pins = <
++			MX6QDL_PAD_SD2_CMD__SD2_CMD	0x17059
++			MX6QDL_PAD_SD2_CLK__SD2_CLK	0x10059
++			MX6QDL_PAD_SD2_DAT0__SD2_DATA0	0x17059
++			MX6QDL_PAD_SD2_DAT1__SD2_DATA1	0x17059
++			MX6QDL_PAD_SD2_DAT2__SD2_DATA2	0x17059
++			MX6QDL_PAD_SD2_DAT3__SD2_DATA3	0x17059
++		>;
++	};
++
++	pinctrl_usdhc3: usdhc3grp {
++		fsl,pins = <
++			MX6QDL_PAD_SD3_CMD__SD3_CMD	0x17059
++			MX6QDL_PAD_SD3_CLK__SD3_CLK	0x10059
++			MX6QDL_PAD_SD3_DAT0__SD3_DATA0	0x17059
++			MX6QDL_PAD_SD3_DAT1__SD3_DATA1	0x17059
++			MX6QDL_PAD_SD3_DAT2__SD3_DATA2	0x17059
++			MX6QDL_PAD_SD3_DAT3__SD3_DATA3	0x17059
++		>;
++	};
++};
++
++&pcie {
++	fsl,tx-swing-full = <103>;
++	fsl,tx-swing-low = <103>;
++	reset-gpio = <&gpio4 11 GPIO_ACTIVE_LOW>;
++	status = "disabled";
++};
++
++&pwm2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm2>;
++	status = "disabled";
++};
++
++&reg_arm {
++	vin-supply = <&sw1a_reg>;
++};
++
++&reg_pu {
++	vin-supply = <&sw1c_reg>;
++};
++
++&reg_soc {
++	vin-supply = <&sw1c_reg>;
++};
++
++&snvs_poweroff {
++	status = "okay";
++};
++
++&ssi2 {
++	status = "okay";
++};
++
++&uart1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1>;
++	status = "disabled";
++};
++
++&uart2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart2 &pinctrl_bt>;
++	uart-has-rtscts;
++	status = "okay";
++
++	bluetooth {
++		compatible = "ti,wl1835-st";
++		enable-gpios = <&gpio6 18 GPIO_ACTIVE_HIGH>;
++	};
++};
++
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart3>;
++	uart-has-rtscts;
++	status = "disabled";
++};
++
++&usbh1 {
++	status = "disabled";
++};
++
++&usbotg {
++	vbus-supply = <&reg_usb_otg_vbus>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usbotg>;
++	disable-over-current;
++	status = "disabled";
++};
++
++&usdhc1 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
++	bus-width = <4>;
++	vmmc-supply = <&reg_wl18xx_vmmc>;
++	non-removable;
++	wakeup-source;
++	keep-power-in-suspend;
++	cap-power-off-card;
++	#address-cells = <1>;
++	#size-cells = <0>;
++	status = "okay";
++
++	wlcore: wlcore@2 {
++		compatible = "ti,wl1835";
++		reg = <2>;
++		interrupt-parent = <&gpio6>;
++		interrupts = <17 IRQ_TYPE_LEVEL_HIGH>;
++		ref-clock-frequency = <38400000>;
++	};
++};
++
++&usdhc2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc2>;
++	no-1-8-v;
++	keep-power-in-suspend;
++	wakeup-source;
++	status = "disabled";
++};
++
++&usdhc3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc3>;
++	non-removable;
++	keep-power-in-suspend;
++	wakeup-source;
++	status = "okay";
++};
+diff --git a/include/dt-bindings/sound/fsl-imx-audmux.h b/include/dt-bindings/sound/fsl-imx-audmux.h
+new file mode 100644
+index 0000000..751fe14
+--- /dev/null
++++ b/include/dt-bindings/sound/fsl-imx-audmux.h
+@@ -0,0 +1,57 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef __DT_FSL_IMX_AUDMUX_H
++#define __DT_FSL_IMX_AUDMUX_H
++
++#define MX27_AUDMUX_HPCR1_SSI0		0
++#define MX27_AUDMUX_HPCR2_SSI1		1
++#define MX27_AUDMUX_HPCR3_SSI_PINS_4	2
++#define MX27_AUDMUX_PPCR1_SSI_PINS_1	3
++#define MX27_AUDMUX_PPCR2_SSI_PINS_2	4
++#define MX27_AUDMUX_PPCR3_SSI_PINS_3	5
++
++#define MX31_AUDMUX_PORT1_SSI0		0
++#define MX31_AUDMUX_PORT2_SSI1		1
++#define MX31_AUDMUX_PORT3_SSI_PINS_3	2
++#define MX31_AUDMUX_PORT4_SSI_PINS_4	3
++#define MX31_AUDMUX_PORT5_SSI_PINS_5	4
++#define MX31_AUDMUX_PORT6_SSI_PINS_6	5
++#define MX31_AUDMUX_PORT7_SSI_PINS_7	6
++
++#define MX51_AUDMUX_PORT1_SSI0		0
++#define MX51_AUDMUX_PORT2_SSI1		1
++#define MX51_AUDMUX_PORT3		2
++#define MX51_AUDMUX_PORT4		3
++#define MX51_AUDMUX_PORT5		4
++#define MX51_AUDMUX_PORT6		5
++#define MX51_AUDMUX_PORT7		6
++
++/* Register definitions for the i.MX21/27 Digital Audio Multiplexer */
++#define IMX_AUDMUX_V1_PCR_INMMASK(x)	((x) & 0xff)
++#define IMX_AUDMUX_V1_PCR_INMEN		(1 << 8)
++#define IMX_AUDMUX_V1_PCR_TXRXEN	(1 << 10)
++#define IMX_AUDMUX_V1_PCR_SYN		(1 << 12)
++#define IMX_AUDMUX_V1_PCR_RXDSEL(x)	(((x) & 0x7) << 13)
++#define IMX_AUDMUX_V1_PCR_RFCSEL(x)	(((x) & 0xf) << 20)
++#define IMX_AUDMUX_V1_PCR_RCLKDIR	(1 << 24)
++#define IMX_AUDMUX_V1_PCR_RFSDIR	(1 << 25)
++#define IMX_AUDMUX_V1_PCR_TFCSEL(x)	(((x) & 0xf) << 26)
++#define IMX_AUDMUX_V1_PCR_TCLKDIR	(1 << 30)
++#define IMX_AUDMUX_V1_PCR_TFSDIR	(1 << 31)
++
++/* Register definitions for the i.MX25/31/35/51 Digital Audio Multiplexer */
++#define IMX_AUDMUX_V2_PTCR_TFSDIR	(1 << 31)
++#define IMX_AUDMUX_V2_PTCR_TFSEL(x)	(((x) & 0xf) << 27)
++#define IMX_AUDMUX_V2_PTCR_TCLKDIR	(1 << 26)
++#define IMX_AUDMUX_V2_PTCR_TCSEL(x)	(((x) & 0xf) << 22)
++#define IMX_AUDMUX_V2_PTCR_RFSDIR	(1 << 21)
++#define IMX_AUDMUX_V2_PTCR_RFSEL(x)	(((x) & 0xf) << 17)
++#define IMX_AUDMUX_V2_PTCR_RCLKDIR	(1 << 16)
++#define IMX_AUDMUX_V2_PTCR_RCSEL(x)	(((x) & 0xf) << 12)
++#define IMX_AUDMUX_V2_PTCR_SYN		(1 << 11)
++
++#define IMX_AUDMUX_V2_PDCR_RXDSEL(x)	(((x) & 0x7) << 13)
++#define IMX_AUDMUX_V2_PDCR_TXRXEN	(1 << 12)
++#define IMX_AUDMUX_V2_PDCR_MODE(x)	(((x) & 0x3) << 8)
++#define IMX_AUDMUX_V2_PDCR_INMMASK(x)	((x) & 0xff)
++
++#endif /* __DT_FSL_IMX_AUDMUX_H */
+-- 
+2.7.4
+
