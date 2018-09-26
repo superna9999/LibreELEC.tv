@@ -3,11 +3,12 @@
 # Copyright (C) 2017-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="LibreELEC-settings"
-PKG_VERSION="f476f01989b00ff5fb6c5c2fce37fa55bad73c46"
-PKG_SHA256="9b84c5b4deb825d9400f509c9bde319d89f2097b87944f0550d1e07b52f4ac40"
+PKG_VERSION="ccf88a63a13fc91a97977505a9f5f94b0d95c96b"
+PKG_SHA256="d653b575c923f457dee82818c146b5ae37bcffa58d93b26ecc630c5ef22e42f5"
 PKG_LICENSE="GPL"
 PKG_SITE="https://libreelec.tv"
-PKG_URL="https://github.com/LibreELEC/service.libreelec.settings/archive/$PKG_VERSION.tar.gz"
+PKG_URL="https://github.com/chewitt/service.libreelec.settings/archive/$PKG_VERSION.tar.gz"
+PKG_SOURCE_DIR="service.libreelec.settings-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain Python2 connman pygobject dbus-python"
 PKG_LONGDESC="LibreELEC-settings: is a settings dialog for LibreELEC"
 
