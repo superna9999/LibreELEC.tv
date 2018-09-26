@@ -24,6 +24,22 @@ case "$LINUX" in
     PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET aml-dtbtools:host"
     PKG_BUILD_PERF="no"
     ;;
+  amlogic-amlgx)
+    PKG_VERSION="e167c22f8b3249e881c47912e7bd78184d1eb98e" # 5.1-rc1
+    PKG_SHA256="32df47cffba1b230bf0616f274f75d5e677672780ad0c443cf11e0c16b04ee4f"
+    PKG_URL="https://github.com/superna9999/linux/archive/$PKG_VERSION.tar.gz"
+    PKG_SOURCE_DIR="$PKG_NAME-$PKG_VERSION*"
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET u-boot"
+    PKG_PATCH_DIRS="default amlogic-amlgx"
+    ;;
+  amlogic-g12)
+    PKG_VERSION="cc0aab20a38771171c9d12d2dc26d6acfaa1aa00" # v5.1-rc1
+    PKG_SHA256="9233bb779c8c2a232d0c8bfc4d0aefaf7b62a777965e3a005706490bc47bf311"
+    PKG_URL="https://gitlab.com/superna9999/linux/-/archive/$PKG_VERSION/$PKG_NAME-$PKG_VERSION.tar.gz"
+    PKG_SOURCE_DIR="$PKG_NAME-$PKG_VERSION*"
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET u-boot"
+    PKG_PATCH_DIRS="default amlogic-g12"
+    ;;
   rockchip-4.4)
     PKG_VERSION="aa8bacf821e5c8ae6dd8cae8d64011c741659945"
     PKG_SHA256="a2760fe89a15aa7be142fd25fb08ebd357c5d855c41f1612cf47c6e89de39bb3"
