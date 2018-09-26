@@ -1,0 +1,20 @@
+  # Configuration for u-boot
+    UBOOT_SYSTEM="Odroid_C2"
+
+  # Kernel extra targets to build
+    KERNEL_UBOOT_EXTRA_TARGET="amlogic/meson-gxbb-odroidc2.dtb"
+
+  # MALI GPU family (dvalin,gondol,midgard,utgard)
+    MALI_FAMILY="utgard"
+
+  # additional packages to install:
+  # e.g. ADDITIONAL_PACKAGES="PACKAGE1 PACKAGE2"
+    ADDITIONAL_PACKAGES+=" amlogic-boot-fip"
+
+  # additional Firmware to use (dvb-firmware, misc-firmware, wlan-firmware)
+  # Space separated list is supported,
+  # e.g. FIRMWARE="dvb-firmware misc-firmware wlan-firmware"
+    FIRMWARE="brcmfmac_sdio-firmware-aml meson-firmware"
+
+  # OOTB support for IR remote
+    IR_REMOTE_KEYMAPS+=" odroid"
