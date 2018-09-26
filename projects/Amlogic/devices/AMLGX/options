@@ -1,14 +1,14 @@
-  # Configuration for u-boot
-    UBOOT_VERSION="vendor"
+  # Kernel to use
+    LINUX="amlogic-amlgx"
 
   # Additional kernel make parameters
     KERNEL_MAKE_EXTRACMD="dtbs"
 
-  # Mali GPU family
-    MALI_FAMILY="450"
+  # OpenGL-ES implementation to use
+    OPENGLES="mesa"
 
-  # additional Firmware to use
-    FIRMWARE+=" qca-firmware"
+  # Graphic drivers to use
+    GRAPHIC_DRIVERS="lima panfrost"
 
-  # additional packages to install:
-    ADDITIONAL_PACKAGES+=" aml_autoscript amlogic-boot-fip cpumac"
+  # KODI Player implementation to use
+    KODIPLAYER_DRIVER="$OPENGLES"
