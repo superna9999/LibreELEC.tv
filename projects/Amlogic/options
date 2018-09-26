@@ -1,0 +1,115 @@
+################################################################################
+# setup system defaults
+################################################################################
+
+  # The TARGET_CPU variable controls which processor should be targeted for
+  # generated code.
+    case $TARGET_ARCH in
+      aarch64)
+        TARGET_CPU="cortex-a53"
+        TARGET_CPU_FLAGS="+crc+fp+simd"
+        TARGET_FEATURES="64bit"
+        ;;
+      arm)
+        TARGET_KERNEL_ARCH="arm64"
+        TARGET_PATCH_ARCH="aarch64"
+        TARGET_FLOAT=hard
+        TARGET_CPU="cortex-a53"
+        TARGET_CPU_FLAGS="+crc"
+        TARGET_FPU="neon-fp-armv8"
+        TARGET_FEATURES="32bit"
+        ;;
+    esac
+
+  # Bootloader to use (syslinux / u-boot / bcm2835-bootloader)
+    BOOTLOADER="u-boot"
+
+  # u-boot version to use (default)
+    UBOOT_VERSION="vendor"
+
+  # Kernel target
+    KERNEL_TARGET="uImage"
+
+  # Kernel uImage load address
+    KERNEL_UIMAGE_LOADADDR="0x1080000"
+
+  # Kernel uImage entry address
+    KERNEL_UIMAGE_ENTRYADDR="0x1080000"
+
+  # Kernel extra targets to build
+    KERNEL_UBOOT_EXTRA_TARGET=""
+
+  # Additional kernel make parameters 
+    KERNEL_MAKE_EXTRACMD=""
+
+  # kernel serial console
+    EXTRA_CMDLINE="console=ttyAML0,115200n8 console=tty0 earlycon"
+
+################################################################################
+# setup build defaults
+################################################################################
+
+  # Project CFLAGS
+    PROJECT_CFLAGS=""
+
+  # SquashFS compression method (gzip / lzo / xz / zstd)
+    SQUASHFS_COMPRESSION="zstd"
+
+################################################################################
+# setup project defaults
+################################################################################
+
+  # build and install ALSA Audio support (yes / no)
+    ALSA_SUPPORT="yes"
+
+  # OpenGL(X) implementation to use (no / mesa)
+    OPENGL="no"
+
+  # include uvesafb support (yes / no)
+    UVESAFB_SUPPORT="no"
+
+  # Displayserver to use (x11 / no)
+    DISPLAYSERVER="no"
+
+  # Windowmanager to use (ratpoison / fluxbox / none)
+    WINDOWMANAGER="none"
+
+  # Modules to install in initramfs for early boot
+    INITRAMFS_MODULES=""
+
+  # additional drivers to install:
+    ADDITIONAL_DRIVERS="linux_openvfd wireguard"
+
+  # additional Firmware to use (dvb-firmware, misc-firmware, wlan-firmware)
+    FIRMWARE="brcmfmac_sdio-firmware meson-firmware qca-firmware"
+
+  # build and install ATV IR remote support (yes / no)
+    ATVCLIENT_SUPPORT="no"
+
+  # Amlogic IR remote support (yes / no)
+    AMREMOTE_SUPPORT="no"
+
+  # build and install iSCSI support - iscsistart (yes / no)
+    ISCSI_SUPPORT="no"
+
+  # build with installer (yes / no)
+    INSTALLER_SUPPORT="no"
+
+  # build and install driver addons (yes / no)
+    DRIVER_ADDONS_SUPPORT="no"
+
+  # driver addons to install:
+    DRIVER_ADDONS="crazycat dvb-latest"
+
+  # additional packages to install:
+    ADDITIONAL_PACKAGES="aml_autoscript amlogic-boot-fip dtc ethmactool"
+
+  # use the kernel CEC framework for libcec (yes / no)
+    CEC_FRAMEWORK_SUPPORT="yes"
+
+  # Addon Server Url
+    ADDON_SERVER_URL="https://amlgx.libreelec.tv"
+
+  # set the addon dirs
+    ADDON_PATH="$ADDON_VERSION/${DEVICE:-$PROJECT}/$TARGET_ARCH"
+    ADDON_URL="$ADDON_SERVER_URL/$ADDON_PATH"
