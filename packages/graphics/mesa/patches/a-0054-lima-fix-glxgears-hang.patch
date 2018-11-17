@@ -1,0 +1,43 @@
+From d0134195ccff7f8ff99f5f843128c0d97231bab6 Mon Sep 17 00:00:00 2001
+From: Qiang Yu <yuq825@gmail.com>
+Date: Sun, 25 Nov 2018 15:55:38 +0800
+Subject: [PATCH 54/63] lima: fix glxgears hang
+
+glxgears will pass in some invalid draw like
+2 vertex GL_QUARD_STRIP draw which causes GP
+hang.
+
+Signed-off-by: Qiang Yu <yuq825@gmail.com>
+---
+ src/gallium/drivers/lima/lima_draw.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/src/gallium/drivers/lima/lima_draw.c b/src/gallium/drivers/lima/lima_draw.c
+index 082530b..5fbc295 100644
+--- a/src/gallium/drivers/lima/lima_draw.c
++++ b/src/gallium/drivers/lima/lima_draw.c
+@@ -32,6 +32,7 @@
+ #include "util/u_pack_color.h"
+ #include "util/hash_table.h"
+ #include "util/u_upload_mgr.h"
++#include "util/u_prim.h"
+ 
+ #include "lima_context.h"
+ #include "lima_screen.h"
+@@ -1322,6 +1323,13 @@ lima_draw_vbo(struct pipe_context *pctx, const struct pipe_draw_info *info)
+ {
+    debug_checkpoint();
+ 
++   /* check if draw mode and vertex/index count match,
++    * otherwise gp will hang */
++   if (!u_trim_pipe_prim(info->mode, (unsigned*)&info->count)) {
++      debug_printf("draw mode and vertex/index count mismatch\n");
++      return;
++   }
++
+    struct lima_context *ctx = lima_context(pctx);
+ 
+    if (!ctx->vs || !ctx->fs) {
+-- 
+2.7.4
+

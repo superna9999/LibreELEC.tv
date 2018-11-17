@@ -1,0 +1,83 @@
+From 3703c9b824f74bacadb81cc1ae0ffd6b08edb94d Mon Sep 17 00:00:00 2001
+From: Qiang Yu <yuq825@gmail.com>
+Date: Wed, 5 Dec 2018 22:56:32 +0800
+Subject: [PATCH 63/63] lima/ppir: fix load coord from const node crash
+
+fragment shader from glamor:
+
+precision mediump float;
+
+varying vec2 glyph_pos;
+uniform sampler2D sampler;
+uniform sampler2D atlas;
+void main() {
+       vec4 mask = texture2D(atlas, glyph_pos);
+       vec4 source = texture2D(sampler, vec2(0.5));
+       gl_FragColor = source * mask.a;
+}
+
+Signed-off-by: Qiang Yu <yuq825@gmail.com>
+---
+ src/gallium/drivers/lima/ir/pp/node_to_instr.c | 41 +++++++++++++++-----------
+ 1 file changed, 23 insertions(+), 18 deletions(-)
+
+diff --git a/src/gallium/drivers/lima/ir/pp/node_to_instr.c b/src/gallium/drivers/lima/ir/pp/node_to_instr.c
+index 43ced57..ab882c5 100644
+--- a/src/gallium/drivers/lima/ir/pp/node_to_instr.c
++++ b/src/gallium/drivers/lima/ir/pp/node_to_instr.c
+@@ -93,29 +93,34 @@ static bool insert_to_each_succ_instr(ppir_block *block, ppir_node *node)
+ 
+    ppir_node_foreach_succ_safe(node, dep) {
+       ppir_node *succ = dep->succ;
+-      assert(succ->type == ppir_node_type_alu);
+ 
+-      if (!ppir_instr_insert_node(succ->instr, node)) {
+-         /* create a move node to insert for failed node */
+-         if (!move) {
+-            move = ppir_node_create(block, ppir_op_mov, -1, 0);
+-            if (unlikely(!move))
+-               return false;
++      if (node->op != ppir_op_const || succ->op != ppir_op_load_coords) {
++         assert(succ->type == ppir_node_type_alu);
+ 
+-            ppir_debug("node_to_instr create move %d for %d\n",
+-                       move->index, node->index);
++         if (ppir_instr_insert_node(succ->instr, node))
++            continue;
++      }
+ 
+-            ppir_alu_node *alu = ppir_node_to_alu(move);
+-            alu->dest = *dest;
+-            alu->num_src = 1;
+-            ppir_node_target_assign(alu->src, dest);
+-            for (int i = 0; i < 4; i++)
+-               alu->src->swizzle[i] = i;
+-         }
++      /* create a move node to insert for const+load_coords or
++       * insert failed case */
++      if (!move) {
++         move = ppir_node_create(block, ppir_op_mov, -1, 0);
++         if (unlikely(!move))
++            return false;
++
++         ppir_debug("node_to_instr create move %d for %d\n",
++                    move->index, node->index);
+ 
+-         ppir_node_replace_pred(dep, move);
+-         ppir_node_replace_child(succ, node, move);
++         ppir_alu_node *alu = ppir_node_to_alu(move);
++         alu->dest = *dest;
++         alu->num_src = 1;
++         ppir_node_target_assign(alu->src, dest);
++         for (int i = 0; i < 4; i++)
++            alu->src->swizzle[i] = i;
+       }
++
++      ppir_node_replace_pred(dep, move);
++      ppir_node_replace_child(succ, node, move);
+    }
+ 
+    if (move) {
+-- 
+2.7.4
+
