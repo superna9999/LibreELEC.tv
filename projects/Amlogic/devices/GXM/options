@@ -1,0 +1,23 @@
+  # Configuration for u-boot
+    UBOOT_VERSION="chewitt"
+
+  # Additional kernel make parameters (for example to specify the u-boot loadaddress)
+    KERNEL_MAKE_EXTRACMD="dtbs"
+
+  # kernel serial console
+    EXTRA_CMDLINE="console=ttyAML0,115200n8 console=tty0 no_console_suspend consoleblank=0 systemd.show_status=auto"
+
+  # MALI GPU family (dvalin,gondol,midgard,utgard)
+    MALI_FAMILY="midgard"
+
+  # additional drivers to install:
+    ADDITIONAL_DRIVERS="mali-midgard openvfd"
+
+  # additional packages to install:
+    ADDITIONAL_PACKAGES+=" aml_autoscript cpumac"
+
+  # additional Firmware to use (dvb-firmware, misc-firmware, wlan-firmware)
+    FIRMWARE="ath10k-firmware \
+              brcmfmac_sdio-firmware-aml \
+              meson-firmware \
+              qca-firmware"

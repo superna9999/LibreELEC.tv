@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
+
+# This script copies files from the build.LibreELEC* directories to
+# the target/LibreELEC-$DEVICE-$VERSION/3rdparty/bootloader staging
+# area. Later scripts (mkimage) copy files from the staging area to
+# the .img file.
+
+mkdir -p $RELEASE_DIR/3rdparty/bootloader
+  if [ -n "$UBOOT_SYSTEM" ]; then
+    BOOTLOADER_DIR=$(get_build_dir $BOOTLOADER)
+    if [ -f $BOOTLOADER_DIR/uboot.img ]; then
+      echo "release: copying uboot.img"
+      cp -a $BOOTLOADER_DIR/uboot.img $RELEASE_DIR/3rdparty/bootloader
+    fi
+  fi
+  for file in $(get_build_dir aml_autoscript)/* ;do
+    echo "release: copying $(basename $file)"
+    cp -a $file $RELEASE_DIR/3rdparty/bootloader
+  done
+
+mkdir -p $RELEASE_DIR/3rdparty/bootloader/dtb
+  DTS=$(get_build_dir linux)/arch/$TARGET_KERNEL_ARCH/boot/dts
+  case $DEVICE in
+    GXBB)
+      MESON="meson-gxbb"
+      ;;
+    GXL)
+      MESON="meson-gxl"
+      ;;
+    GXM)
+      MESON="meson-gxm"
+      ;;
+  esac
+  for dtb in $DTS/amlogic/$MESON*.dtb ; do
+    echo "release: copying $(basename $dtb)"
+    cp -a $dtb $RELEASE_DIR/3rdparty/bootloader/dtb
+  done
