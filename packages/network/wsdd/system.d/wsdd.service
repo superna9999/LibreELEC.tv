@@ -1,0 +1,23 @@
+[Unit]
+Description=ONVIF WS-Discovery Server Service
+After=network-online.target
+
+[Service]
+Type=forking
+WorkingDirectory=/run/wsdd
+PIDFile=/tmp/wsdd.pid
+ExecStart=/usr/bin/wsdd \
+    --pid_file /tmp/wsdd.pid \
+    --if_name eth0 \
+    --type tdn:NetworkVideoTransmitter \
+    --xaddr http://%%s:1000/onvif/device_service \
+    --scope \"onvif://www.onvif.org/name/Unknown \
+	onvif://www.onvif.org/Profile/Streaming \
+	onvif://www.onvif.org/location/ANY\"
+TimeoutSec=4
+Restart=always
+RestartSec=2
+StartLimitBurst=0
+
+[Install]
+WantedBy=multi-user.target
