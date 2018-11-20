@@ -1,0 +1,22 @@
+From 9f1a7750f9da0994fb1d3967268e82030af985a7 Mon Sep 17 00:00:00 2001
+From: MilhouseVH <milhouseVH.github@nmacleod.com>
+Date: Fri, 7 Dec 2018 02:08:16 +0000
+Subject: [PATCH] quieten hwclock error when there is no rtc
+
+---
+ src/resources/lib/modules/system.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/resources/lib/modules/system.py b/src/resources/lib/modules/system.py
+index 2fee3cc..fdf73b5 100644
+--- a/src/resources/lib/modules/system.py
++++ b/src/resources/lib/modules/system.py
+@@ -521,7 +521,7 @@ def get_keyboard_layouts(self):
+     def set_hw_clock(self):
+         try:
+             self.oe.dbg_log('system::set_hw_clock', 'enter_function', 0)
+-            self.oe.execute(self.SET_CLOCK_CMD)
++            self.oe.execute('%s 2>/dev/null' % self.SET_CLOCK_CMD)
+             self.oe.dbg_log('system::set_hw_clock', 'exit_function', 0)
+         except Exception, e:
+             self.oe.dbg_log('system::set_hw_clock', 'ERROR: (' + repr(e) + ')', 4)
