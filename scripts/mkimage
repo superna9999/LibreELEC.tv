@@ -248,6 +248,34 @@ EOF
   mcopy "${RELEASE_DIR}/target/KERNEL.md5" "::/${KERNEL_NAME}.md5"
   mcopy "${RELEASE_DIR}/target/SYSTEM.md5" ::/SYSTEM.md5
 
+elif [ "$BOOTLOADER" = "u-boot" -a "$UBOOT_VERSION" = "chewitt" ]; then
+    echo ""
+   # create bootloader configuration
+    echo "mkimage: creating bootloader configuration"
+   # create extlinux files
+    mkdir -p "$LE_TMP"/extlinux
+    cat << EOF > "$LE_TMP"/extlinux/extlinux.conf
+LABEL $DISTRO
+  LINUX /$KERNEL_NAME
+  FDT /dtb/@@DEVICE_TREE@@
+  APPEND boot=UUID=$UUID_SYSTEM disk=UUID=$UUID_STORAGE quiet hdmitx=cecf $EXTRA_CMDLINE
+EOF
+   # copy extlinux files
+    echo "mkimage: copying extlinux files to part1"
+    mcopy -sv "$LE_TMP"/extlinux/extlinux.conf ::
+   # sed UUIDs
+    sed -i "s/@@UUID_SYSTEM@@/$UUID_SYSTEM/g" $RELEASE_DIR/3rdparty/bootloader/uEnv.ini
+    sed -i "s/@@UUID_STORAGE@@/$UUID_STORAGE/g" $RELEASE_DIR/3rdparty/bootloader/uEnv.ini
+   # copy autoscript and dtb files
+    echo "mkimage: copying dtb files to part1"
+    mcopy -sv $RELEASE_DIR/3rdparty/bootloader/* ::
+   # copy SYSTEM and KERNEL files
+    echo "mkimage: copying OS files to part1"
+    mcopy $TARGET_IMG/$IMAGE_NAME.kernel "::/$KERNEL_NAME"
+    mcopy $TARGET_IMG/$IMAGE_NAME.system ::/SYSTEM
+    mcopy $RELEASE_DIR/target/KERNEL.md5 "::/$KERNEL_NAME.md5"
+    mcopy $RELEASE_DIR/target/SYSTEM.md5 ::/SYSTEM.md5
+
 elif [ "${BOOTLOADER}" = "u-boot" ]; then
   echo "to make an image using u-boot UBOOT_SYSTEM must be set"
   cleanup
