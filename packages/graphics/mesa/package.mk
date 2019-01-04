@@ -3,15 +3,25 @@
 # Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="mesa"
-PKG_VERSION="19.0.2"
-PKG_SHA256="2b64022b209fd729ec164f746bd237a8b1dfa9d85dcf1bbc70103e986dbfc60c"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.mesa3d.org/"
-PKG_URL="https://github.com/mesa3d/mesa/archive/mesa-$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain expat libdrm Mako:host"
 PKG_LONGDESC="Mesa is a 3-D graphics library with an API."
 PKG_TOOLCHAIN="meson"
 PKG_BUILD_FLAGS="+lto"
+
+case $PROJECT in
+  Amlogic)
+    PKG_VERSION="77d091d0c5dc1f1b174668cb1da5f00ad391d76d" # master-19.1
+    PKG_SHA256="b1113cd7f0055b79e0f597cdc3424e901c3407c6d4729222a79e829d933e0c3e"
+    PKG_URL="https://gitlab.freedesktop.org/mesa/mesa/-/archive/$PKG_VERSION/mesa-$PKG_VERSION.tar.gz"
+    ;;
+  *)
+    PKG_VERSION="19.0.2"
+    PKG_SHA256="2b64022b209fd729ec164f746bd237a8b1dfa9d85dcf1bbc70103e986dbfc60c"
+    PKG_URL="https://github.com/mesa3d/mesa/archive/mesa-$PKG_VERSION.tar.gz"
+    ;;
+esac
 
 get_graphicdrivers
 
@@ -89,6 +99,20 @@ fi
 pre_configure_target() {
   if [ "$DISPLAYSERVER" = "x11" ]; then
     export LIBS="-lxcb-dri3 -lxcb-dri2 -lxcb-xfixes -lxcb-present -lxcb-sync -lxshmfence -lz"
+  fi
+
+  # Temporary hack (until panfrost evolves) to use 64-bit pointers in structs passed to GPU
+  # even if userspace is 32-bit. This is required for Mali-T820 to work with mesa built for
+  # arm userspace. The hack does not affect building for aarch64.
+  if [ "$PROJECT" = "Amlogic" ]; then
+    pushd "$PKG_BUILD/src/gallium/drivers/panfrost"
+      sed -i 's/uintptr_t/uint64_t/g' include/panfrost-job.h \
+                                      include/panfrost-misc.h \
+                                      pan_context.c \
+                                      pandecode/decode.c
+
+      find -type f -exec sed -i 's/ndef __LP64__/ 0/g; s/def __LP64__/ 1/g' {} +;
+    popd
   fi
 }
 
