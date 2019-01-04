@@ -1,81 +1,173 @@
---- a/dev/null	2018-07-29 06:04:57.325209617 +0100
-+++ b/arch/arm64/boot/dts/amlogic/meson-gxm-mali.dtsi	2018-09-08 12:46:02.159231207 +0100
-@@ -0,0 +1,68 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Author: Christian Hewitt <christianshewitt@gmail.com>
-+ */
+From patchwork Mon Dec 10 13:22:27 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Patchwork-Submitter: Neil Armstrong <narmstrong@baylibre.com>
+X-Patchwork-Id: 10721295
+Return-Path: 
+ <linux-amlogic-bounces+patchwork-linux-amlogic=patchwork.kernel.org@lists.infradead.org>
+Received: from mail.wl.linuxfoundation.org (pdx-wl-mail.web.codeaurora.org
+ [172.30.200.125])
+	by pdx-korg-patchwork-2.web.codeaurora.org (Postfix) with ESMTP id 3CBBE112E
+	for <patchwork-linux-amlogic@patchwork.kernel.org>;
+ Mon, 10 Dec 2018 13:23:47 +0000 (UTC)
+Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
+	by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 2566E2984F
+	for <patchwork-linux-amlogic@patchwork.kernel.org>;
+ Mon, 10 Dec 2018 13:23:47 +0000 (UTC)
+Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
+	id 233F129A0F; Mon, 10 Dec 2018 13:23:47 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	pdx-wl-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-5.2 required=2.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,MAILING_LIST_MULTI,RCVD_IN_DNSWL_MED autolearn=ham version=3.3.1
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+	(using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.wl.linuxfoundation.org (Postfix) with ESMTPS id B69862984F
+	for <patchwork-linux-amlogic@patchwork.kernel.org>;
+ Mon, 10 Dec 2018 13:23:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.infradead.org; s=bombadil.20170209; h=Sender:
+	Content-Transfer-Encoding:Content-Type:Cc:List-Subscribe:List-Help:List-Post:
+	List-Archive:List-Unsubscribe:List-Id:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:To:From:Reply-To:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	List-Owner; bh=xdsUKf8D1sxAM20Pznc4dLtnc3WBRtarOSitqoNPbMs=; b=hUKzpDkGd2Dpdk
+	Pm4/CyBmr4HfNDEVCxug7birBvE4ZHxtIoBrKPTqEeye9eybQxqx6KvdQ9fFi7dxkq3H4mwRF7Ura
+	hbtyALWJ3w63W20IDR1s7dA6bx8hrcjueFJwSEElsfeVwfYvljJFJKmXXna6haqZgMWVj4LLKeKV8
+	6V9E9DKLgQnMj8bnSaUNXcZRFXONqAY1Zhk15cTnDE9uTKC3qVoK2P+RcvDWy+nWlzzDnhn3KLhB/
+	rZZcG5NH4SyEfBKv8QNXjRab5o23QTiOdJ4PqJbGPvgvJQSQM5T6DlyKILjqZ13Rs+VPQY9MWMdKf
+	uguJZbQTbEX2N2HunVVA==;
+Received: from localhost ([127.0.0.1] helo=bombadil.infradead.org)
+	by bombadil.infradead.org with esmtp (Exim 4.90_1 #2 (Red Hat Linux))
+	id 1gWLXD-0006EZ-W1; Mon, 10 Dec 2018 13:23:44 +0000
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343])
+ by bombadil.infradead.org with esmtps (Exim 4.90_1 #2 (Red Hat Linux))
+ id 1gWLWG-0005Cx-Rx
+ for linux-amlogic@lists.infradead.org; Mon, 10 Dec 2018 13:22:49 +0000
+Received: by mail-wm1-x343.google.com with SMTP id g67so11168690wmd.2
+ for <linux-amlogic@lists.infradead.org>;
+ Mon, 10 Dec 2018 05:22:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20150623.gappssmtp.com; s=20150623;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=uBjdffJIS6e81RZXl0D/cVk1PRz+k7NxIO5RxlBhn+w=;
+ b=ihkzGFbddzBhg7/l98TR3HElWWrO7AG3D5dq2YA45xQZqkZ8mucv9c45zqYilltaHA
+ qdPCJYzke/x2SyUCfzPW351/KNQ4i853vaPH9lvPQ/pM/ynE6nH8tsi9+KS+mAsEnVmf
+ A0q0qvIzGpxE9KFTIRP/LJ+rnfGrfX/GgnJXulyu5nJ1xBNjewiuErZPMASk0QwUU3pz
+ iCxesQcHicy3VTNhEB9MZHosmhlAb4vz55RyDasb1KF9TC4U6SXp+D7Pn6mP7RqXpXtJ
+ Dsf/vLX2Up+Oby27kPdZLlDWu2SLnWd3XX8lPD/vrAYUKoq5iVbT9nxJJwr7ki+wDR6V
+ 0EKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=uBjdffJIS6e81RZXl0D/cVk1PRz+k7NxIO5RxlBhn+w=;
+ b=mGF0AQRAC6vSaUUjNtk79Qk/oO43ix27bcclsqgtgp8K0J9z6k5KX2OVW+wYzvXzSt
+ 3f7/R2WBzvIfvw2WGnQxorlNGWR10XTK88qJB7vDbAk97ftJAppUqCzwRd9mqFBfpoTm
+ 8vYszvIO38Cx+LMOg2JtInZRqBezQDptGHKnfljYMyw4x2/XChBjkRaV9ll3GnGhfVN+
+ qnZjOqJ5PN7raxlTZW8v+zmcxChImmJv846p0XzslWepNWj5IHL04CaObJ6xQfb9ySve
+ MIuWr8TemG7pj0/no+q1g/tNncfxvL2q/CKoypl1RC6myl4uA8eYwsgburKAQaxHWClx
+ ouQA==
+X-Gm-Message-State: AA+aEWZswas8PC62ZqsLuhML+kKTC6QymY8ayWIN0yxTk/4YXWtYUZtN
+ 2S1kbj6uy9mfjXIOTbx1sB6CXA==
+X-Google-Smtp-Source: 
+ AFSGD/VNKgkJdWqMIdXGD3Xop2viNm6jJ/VTo9k/ZE2rcJTd/CFg0jW+zJt4sl4Ns8NHop4RRUZdMQ==
+X-Received: by 2002:a1c:ad43:: with SMTP id w64mr10122640wme.32.1544448152953;
+ Mon, 10 Dec 2018 05:22:32 -0800 (PST)
+Received: from bender.baylibre.local
+ (lmontsouris-657-1-212-31.w90-63.abo.wanadoo.fr. [90.63.244.31])
+ by smtp.gmail.com with ESMTPSA id l3sm11208424wru.36.2018.12.10.05.22.31
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Mon, 10 Dec 2018 05:22:31 -0800 (PST)
+From: Neil Armstrong <narmstrong@baylibre.com>
+To: khilman@baylibre.com
+Subject: [PATCH 2/2] arm64: dts: meson-gxm: Add Mali-T820 node
+Date: Mon, 10 Dec 2018 14:22:27 +0100
+Message-Id: <20181210132227.29262-3-narmstrong@baylibre.com>
+X-Mailer: git-send-email 2.19.2
+In-Reply-To: <20181210132227.29262-1-narmstrong@baylibre.com>
+References: <20181210132227.29262-1-narmstrong@baylibre.com>
+MIME-Version: 1.0
+X-CRM114-Version: 20100106-BlameMichelson ( TRE 0.8.0 (BSD) ) MR-646709E3 
+X-CRM114-CacheID: sfid-20181210_052244_956058_6230E4EB 
+X-CRM114-Status: GOOD (  11.88  )
+X-BeenThere: linux-amlogic@lists.infradead.org
+X-Mailman-Version: 2.1.21
+Precedence: list
+List-Id: <linux-amlogic.lists.infradead.org>
+List-Unsubscribe: <http://lists.infradead.org/mailman/options/linux-amlogic>,
+ <mailto:linux-amlogic-request@lists.infradead.org?subject=unsubscribe>
+List-Archive: <http://lists.infradead.org/pipermail/linux-amlogic/>
+List-Post: <mailto:linux-amlogic@lists.infradead.org>
+List-Help: <mailto:linux-amlogic-request@lists.infradead.org?subject=help>
+List-Subscribe: <http://lists.infradead.org/mailman/listinfo/linux-amlogic>,
+ <mailto:linux-amlogic-request@lists.infradead.org?subject=subscribe>
+Cc: Neil Armstrong <narmstrong@baylibre.com>,
+ Christian Hewitt <christianshewitt@gmail.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-amlogic@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="us-ascii"
+Sender: "linux-amlogic" <linux-amlogic-bounces@lists.infradead.org>
+Errors-To: 
+ linux-amlogic-bounces+patchwork-linux-amlogic=patchwork.kernel.org@lists.infradead.org
+X-Virus-Scanned: ClamAV using ClamSMTP
+
+From: Christian Hewitt <christianshewitt@gmail.com>
+
+The Amlogic Meson GXM SoC embeds an ARM Mali T820 GPU.
+
+This patch adds the node with all the needed properties to power
+on the GPU.
+
+This has been tested with the work-in-progress PanFrost project
+aiming support for ARM Mali Midgard and later GPUs.
+
+Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
+Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
+---
+ arch/arm64/boot/dts/amlogic/meson-gxm.dtsi | 27 ++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxm.dtsi b/arch/arm64/boot/dts/amlogic/meson-gxm.dtsi
+index 247888d68a3a..35e59d390903 100644
+--- a/arch/arm64/boot/dts/amlogic/meson-gxm.dtsi
++++ b/arch/arm64/boot/dts/amlogic/meson-gxm.dtsi
+@@ -91,6 +91,33 @@
+ 		reset-names = "phy";
+ 		status = "okay";
+ 	};
 +
-+&apb {
 +	mali: gpu@c0000 {
-+		compatible = "amlogic,meson-gxm-mali", "arm,mali-t820", "arm,mali-midgard";
++		compatible = "amlogic,meson-gxm-mali", "arm,mali-t820";
 +		reg = <0x0 0xc0000 0x0 0x40000>;
 +		interrupt-parent = <&gic>;
-+		interrupts = <0 160 4>, <0 161 4>, <0 162 4>;
++		interrupts = <GIC_SPI 160 IRQ_TYPE_LEVEL_HIGH>,
++			     <GIC_SPI 161 IRQ_TYPE_LEVEL_HIGH>,
++			     <GIC_SPI 162 IRQ_TYPE_LEVEL_HIGH>;
 +		interrupt-names = "gpu", "mmu", "job";
-+		operating-points-v2 = <&gpu_opp_table>;
-+		clocks = <&clkc CLKID_CLK81>, <&clkc CLKID_MALI>;
-+		clock-names = "bus", "core";
++		clocks = <&clkc CLKID_MALI>;
++		resets = <&reset RESET_MALI_CAPB3>, <&reset RESET_MALI>;
 +
 +		/*
 +		 * Mali clocking is provided by two identical clock paths
 +		 * MALI_0 and MALI_1 muxed to a single clock by a glitch
 +		 * free mux to safely change frequency while running.
 +		 */
-+		assigned-clocks = <&clkc CLKID_GP0_PLL>,
-+				  <&clkc CLKID_MALI_0_SEL>,
++		assigned-clocks = <&clkc CLKID_MALI_0_SEL>,
 +				  <&clkc CLKID_MALI_0>,
 +				  <&clkc CLKID_MALI>; /* Glitch free mux */
-+		assigned-clock-parents = <0>, /* Do Nothing */
-+					 <&clkc CLKID_GP0_PLL>,
++		assigned-clock-parents = <&clkc CLKID_FCLK_DIV3>,
 +					 <0>, /* Do Nothing */
 +					 <&clkc CLKID_MALI_0>;
-+		assigned-clock-rates = <744000000>,
-+				       <0>, /* Do Nothing */
-+				       <744000000>,
++		assigned-clock-rates = <0>, /* Do Nothing */
++				       <666666666>,
 +				       <0>; /* Do Nothing */
 +	};
-+
-+	gpu_opp_table: opp_table0 {
-+		compatible = "operating-points-v2";
-+
-+		opp@744000000 {
-+			opp-hz = /bits/ 64 <744000000>;
-+			opp-microvolt = <1000000>;
-+		};
-+		opp@666666000 {
-+			opp-hz = /bits/ 64 <666666000>;
-+			opp-microvolt = <1000000>;
-+		};
-+		opp@500000000 {
-+			opp-hz = /bits/ 64 <500000000>;
-+			opp-microvolt = <1000000>;
-+		};
-+		opp@400000000 {
-+			opp-hz = /bits/ 64 <400000000>;
-+			opp-microvolt = <1000000>;
-+		};
-+		opp@285714000 {
-+			opp-hz = /bits/ 64 <285714000>;
-+			opp-microvolt = <1000000>;
-+		};
-+		opp@250000000 {
-+			opp-hz = /bits/ 64 <250000000>;
-+			opp-microvolt = <1000000>;
-+		};
-+		opp@125000000 {
-+			opp-hz = /bits/ 64 <125000000>;
-+			opp-microvolt = <1000000>;
-+		};
-+	};
-+};
---- a/arch/arm64/boot/dts/amlogic/meson-gxm.dtsi	2018-09-08 12:49:55.855929864 +0100
-+++ b/arch/arm64/boot/dts/amlogic/meson-gxm.dtsi	2018-09-08 12:49:43.871689279 +0100
-@@ -5,6 +5,7 @@
-  */
+ };
  
- #include "meson-gxl.dtsi"
-+#include "meson-gxm-mali.dtsi"
- 
- / {
- 	compatible = "amlogic,meson-gxm";
+ &clkc_AO {
