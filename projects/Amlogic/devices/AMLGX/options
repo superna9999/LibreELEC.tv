@@ -1,0 +1,14 @@
+  # Configuration for u-boot
+    UBOOT_VERSION="vendor"
+
+  # Additional kernel make parameters
+    KERNEL_MAKE_EXTRACMD="dtbs"
+
+  # Mali GPU family
+    MALI_FAMILY="450"
+
+  # additional Firmware to use
+    FIRMWARE+=" qca-firmware"
+
+  # additional packages to install:
+    ADDITIONAL_PACKAGES+=" aml_autoscript amlogic-boot-fip cpumac"
