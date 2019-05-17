@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
+
+# setup alsa (especially the mixer config)
+
+mixer() {
+  parm=${4:-on}
+  amixer -c "$1" sset "$2" "$3" $parm >/dev/null 2>&1
+  amixer -c "$1" sset "$2" $parm >/dev/null 2>&1
+}
+
+(
+. /etc/profile
+
+progress "Setting up AMLG12 sound card"
+
+# get card num
+card=`echo $1 | sed 's/[^0-9]*//g'`
+
+# HDMI to PCM0
+mixer $card 'FRDDR_A SINK 1 SEL' 'OUT 1'
+mixer $card 'FRDDR_A SRC 1 EN' on
+mixer $card 'TDMOUT_B SRC SEL' 'IN 0'
+mixer $card 'TOHDMITX I2S SRC' 'I2S B'
+mixer $card 'TOHDMITX' on
+
+# SPDIF to PCM1
+mixer $card 'FRDDR_B SRC 1 EN' on
+mixer $card 'FRDDR_B SINK 1 SEL' 'OUT 3'
+mixer $card 'SPDIFOUT SRC SEL' 'IN 1'
+mixer $card 'SPDIFOUT Playback' on
+
+exit 0
+)&
